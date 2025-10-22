@@ -1,0 +1,1001 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  /* 防止瀏覽器的預設縮放行為 */
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+/* ===== 全域結構 ===== */
+.app-root {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  background: #181b23;
+  font-family: 'Inter', 'Noto Sans TC', Arial, sans-serif;
+  overflow: hidden;
+}
+.main-layout {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.map-section {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* ===== 控制面板主區塊 ===== */
+.control-panel-section {
+  width: 100%;
+  flex: none;
+  background: #0e101a;
+  border-radius: 0;
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', 'Noto Sans TC', Arial, sans-serif;
+  color: #e2e8f0;
+  max-height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  box-sizing: border-box;
+  position: relative;
+  container-type: inline-size;
+  display: flex;
+  flex-direction: column;
+}
+.control-panel-section::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+.control-panel-section * {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.control-panel-wrapper {
+  display: flex;
+  min-width: 280px;
+  max-width: 90vw;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 10;
+  box-sizing: border-box;
+  container-type: inline-size;
+  container-name: panel;
+}
+
+/* ===== 控制面板寬度控制 ===== */
+.resize-handle {
+    width: 3px;
+    background: transparent;
+    cursor: col-resize;
+    position: relative;
+    transition: background-color 0.2s;
+    flex-shrink: 0;
+}
+
+.resize-handle:hover {
+    background: #38bdf8;
+}
+
+.resizing {
+    user-select: none;
+}
+
+.resizing * {
+    pointer-events: none;
+}
+
+/* 防止地圖在調整大小時閃爍 */
+.resizing .map-section {
+    pointer-events: none;
+}
+
+body.resizing {
+    cursor: col-resize !important;
+}
+
+/* ===== tab 結構 ===== */
+.panel-tab {
+  display: flex;
+  flex-direction: column;
+}
+.panel-tab-header {
+  font-size: 30px;
+  font-weight: 700;
+  color: #38bdf8;
+}
+.panel-tab-body {
+  padding: 0;
+  position: relative;
+  width: 100%;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: transparent;  /* 透明背景讓灰玻璃效果顯示 */
+  scrollbar-width: none;
+}
+.panel-tab-body::-webkit-scrollbar {
+  display: none;
+}
+.tab-header {
+  display: flex;
+  gap: 1px;
+  margin-bottom: 2px;  /* 減少間距統一左右面板 */
+  background: #0f1218;
+  padding: 0;
+  border-radius: 8px 8px 0 0;
+  overflow: hidden;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+
+.tab-button {
+  flex: 1;
+  min-width: 0;
+  font-size: 16px;  /* 比 accordion 的 14px 大 */
+  padding: 12px 6px;
+  text-align: center;
+  font-weight: 500;
+  background: #1a1f2e;
+  color: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1px;
+}
+
+/* Tab 文字根據控制面板寬度動態縮放 - 只改字體大小 */
+@container panel (max-width: 500px) {
+  .tab-button {
+    font-size: 15px;
+  }
+}
+
+@container panel (max-width: 450px) {
+  .tab-button {
+    font-size: 14px;
+  }
+}
+
+@container panel (max-width: 400px) {
+  .tab-button {
+    font-size: 13px;
+  }
+}
+
+@container panel (max-width: 350px) {
+  .tab-button {
+    font-size: 12px;
+  }
+}
+
+@container panel (max-width: 300px) {
+  .tab-button {
+    font-size: 11px;
+  }
+}
+
+/* XOR Tab Text/Icon Switching */
+.tab-text {
+  display: inline;
+}
+
+.tab-icon {
+  display: none;
+}
+
+@container panel (max-width: 320px) {
+  .tab-text {
+    display: none;
+  }
+  
+  .tab-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Tab 數量過多時也要縮小 - 只改字體大小 */
+.tab-header:has(.tab-button:nth-child(5)) .tab-button {
+  font-size: 15px;
+}
+
+.tab-header:has(.tab-button:nth-child(7)) .tab-button {
+  font-size: 14px;
+}
+
+.tab-header:has(.tab-button:nth-child(9)) .tab-button {
+  font-size: 13px;
+}
+
+.tab-button:last-child {
+  margin-right: 0;
+}
+
+.tab-button:hover:not(.active) {
+  color: #ffffff;
+  background: linear-gradient(90deg, rgba(56, 189, 248, 0.12) 0%, rgba(56, 189, 248, 0.03) 100%);
+}
+
+.tab-button.active {
+  color: #ffffff;
+  font-weight: 600;
+  border-bottom-color: #38bdf8;
+  background: linear-gradient(90deg, rgba(56, 189, 248, 0.25) 0%, rgba(56, 189, 248, 0.08) 100%);
+  box-shadow: 0 2px 8px rgba(56, 189, 248, 0.15);
+}
+
+/* 內容區域 - 需要配合 TAB 使用 */
+.tab-content {
+  background: #1f2937;
+  border: none;
+  border-radius: 0;
+  padding: 2rem;
+  min-height: 150px;
+  position: relative;
+  z-index: 1;
+  color: #e2e8f0;
+}
+
+/* ===== Accordion 結構 ===== */
+/* 統一間距設定 - 所有 accordion 使用相同的間距 */
+.panel-accordion {
+  margin: 0 0 2px 0;  /* 統一 2px 底部間距 (1/4 of 8px) */
+  border: none;
+  background: #1b2030;
+  transition: background 0.2s ease;
+  width: 100%;
+  overflow: hidden;
+}
+
+.panel-accordion[draggable="true"] {
+  user-select: none;
+  cursor: move;
+}
+
+.panel-accordion[draggable="true"]:active {
+  opacity: 0.8;
+  background: rgba(56, 189, 248, 0.1);
+}
+
+.panel-accordion.dragging {
+  opacity: 0.3;
+  transition: opacity 0.2s;
+}
+
+/* 移除特殊處理，讓所有 accordion 保持一致間距 */
+.panel-accordion:last-child {
+  margin-bottom: 2px;  /* 統一間距 */
+}
+
+.panel-accordion.open {
+  background: #1f2536;
+  /* 不需要重複設定 margin，繼承自 .panel-accordion */
+}
+.panel-accordion-header {
+  height: 36px !important;
+  min-height: 36px !important;
+  max-height: 36px !important;
+  font-size: 13px;  /* Slightly reduced */
+  font-weight: 400;  /* 默認不粗體 */
+  padding: 0 20px;
+  cursor: pointer;
+  background: linear-gradient(90deg, rgba(56, 189, 248, 0.07) 0%, transparent 60%);
+  user-select: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;  /* 這個應該讓所有子元素垂直置中 */
+  color: rgba(255, 255, 255, 0.92);
+  transition: all 0.2s ease;
+  position: relative;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.panel-accordion-header > span {
+  display: flex;
+  align-items: center;  /* 確保每個 span 內容也置中 */
+  line-height: 1;  /* 重置 line-height */
+}
+
+.panel-accordion.open .panel-accordion-header {
+  color: #ffffff;
+  font-weight: 500;  /* highlight時變粗 */
+  background: linear-gradient(90deg, rgba(56, 189, 248, 0.17) 0%, rgba(56, 189, 248, 0.04) 100%);
+}
+
+.panel-accordion-header:hover {
+  background: linear-gradient(90deg, rgba(56, 189, 248, 0.1) 0%, rgba(56, 189, 248, 0.02) 100%);
+  color: #ffffff;
+}
+
+.panel-accordion-body {
+  padding: 16px;  /* 統一四邊間距 */
+  background: #0f1218;
+  border-left: 1px solid rgba(56, 189, 248, 0.25);
+  border-right: 1px solid rgba(56, 189, 248, 0.25);
+  border-bottom: 1px solid rgba(56, 189, 248, 0.35);
+  margin: 0;
+  border-radius: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.panel-accordion-body::-webkit-scrollbar {
+  width: 6px;
+}
+.panel-accordion-body::-webkit-scrollbar-track {
+  background: #1a202c;
+}
+.panel-accordion-body::-webkit-scrollbar-thumb {
+  background: rgba(56, 189, 248, 0.5);
+  border-radius: 3px;
+}
+
+/* KPI 下拉選單樣式已移至 styles/components.css */
+
+/* ===== 月曆與滑桿區塊 ===== */
+.calendar-block {
+}
+.slider-block {
+}
+.slider-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.slider {
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: #2c3746;
+  outline: none;
+  accent-color: #38bdf8;
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #38bdf8;
+  cursor: pointer;
+}
+.slider-value {
+  min-width: 40px;
+  text-align: center;
+  font-size: 14px;
+  color: #38bdf8;
+  font-weight: 600;
+}
+
+/* ===== 補充樣式 ===== */
+.accordion-arrow {
+  transition: all 0.2s ease;
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.3);
+  margin-left: auto;
+  flex-shrink: 0;
+}
+.panel-accordion-header:hover .accordion-arrow {
+  background-color: rgba(255, 255, 255, 0.5);
+  transform: scale(1.2);
+}
+.panel-accordion.open .accordion-arrow {
+  background-color: #38bdf8;
+  box-shadow: 0 0 6px rgba(56, 189, 248, 0.5);
+}
+.divider {
+  border: none;
+  border-top: 1px solid #2d3748;
+  margin: 0;
+}
+.calendar-input {
+  width: 100%;
+  padding: 8px 12px;
+  background: #1a1f2e;
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  color: rgba(255, 255, 255, 0.9);
+  border-radius: 4px;
+  font-size: 13px;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.calendar-input:hover {
+  background: linear-gradient(90deg, rgba(56, 189, 248, 0.1) 0%, #1a1f2e 60%);
+}
+
+.calendar-input:focus {
+  background: linear-gradient(90deg, rgba(56, 189, 248, 0.15) 0%, #1a1f2e 60%);
+  border-color: rgba(56, 189, 248, 0.6);
+}
+/* Loading 樣式 */
+.loading-indicator {
+  font-size: 14px;
+  color: #38bdf8;
+  margin-top: 12px;
+  font-style: italic;
+  text-align: center;
+}
+
+/* 地圖圖例區塊 */
+.map-legend {
+  position: absolute;
+  right: 400px;
+  bottom: 16px;
+  background: linear-gradient(135deg, 
+    rgba(30, 41, 59, 0.3) 0%, 
+    rgba(15, 23, 42, 0.35) 100%) !important;
+  border-radius: 6px;
+  padding: 12px 16px;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  color: #e2e8f0;
+  font-size: 13px;
+  z-index: 1000;
+  min-width: 150px;
+}
+.map-legend-title {
+  font-weight: bold;
+  color: #38bdf8;
+  margin-bottom: 8px;
+}
+.map-legend-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px;
+}
+.map-legend-color {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  margin-right: 8px;
+  border: 1px solid #888;
+}
+
+.deckmap-root {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  flex: 1;
+}
+
+/* 確保 DeckGL 可以接收滑鼠和觸控事件 */
+.deckgl-main {
+  pointer-events: auto !important;
+  /* 優化觸控性能 */
+  will-change: transform;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.deckgl-main canvas {
+  pointer-events: auto !important;
+  /* 優化 canvas 渲染 */
+  image-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+}
+.deckmap-toolbar {
+  position: absolute;
+  left: 26px;
+  bottom: 16px;
+  z-index: 1001;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+/* All toolbar button styles moved to components.css as .em-toolbar-btn */
+
+/* Floating Calendar Wrapper */
+.floating-calendar-wrapper {
+  position: absolute;
+  left: 26px;
+  bottom: 80px;
+  background: linear-gradient(135deg, 
+    rgba(30, 41, 59, 0.6) 0%, 
+    rgba(15, 23, 42, 0.65) 100%);
+  border-radius: 6px;
+  padding: 0;
+  min-width: 240px;
+  min-height: 180px;
+  z-index: 1000;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  animation: slideUp 0.3s ease-out;
+  pointer-events: auto;
+  overflow: visible;
+}
+
+/* Floating TimeSlider Wrapper */
+.floating-timeslider-wrapper {
+  position: absolute;
+  right: 26px;
+  bottom: 36px;
+  background: linear-gradient(135deg, 
+    rgba(30, 41, 59, 0.6) 0%, 
+    rgba(15, 23, 42, 0.65) 100%);
+  border-radius: 6px;
+  padding: 0;
+  min-width: 400px;
+  min-height: 150px;
+  z-index: 100;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  animation: slideLeft 0.3s ease-out;
+  overflow: hidden;
+}
+
+/* Floating Panel Header */
+.floating-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 2px 0;
+  padding: 2px 6px 4px 6px;
+  border-bottom: 1px solid rgba(56, 189, 248, 0.15);
+  background: transparent;
+  cursor: move;
+  user-select: none;
+}
+
+.floating-panel-title {
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.floating-panel-close {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  font-size: 14px;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.floating-panel-close:hover {
+  background: rgba(239, 68, 68, 0.3);
+  border-color: rgba(239, 68, 68, 0.5);
+  color: #ff6b6b;
+}
+
+/* Resize edges for panels */
+.resize-edge {
+  position: absolute;
+  background: transparent;
+}
+
+.resize-edge.resize-top {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  cursor: ns-resize;
+}
+
+.resize-edge.resize-right {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 6px;
+  cursor: ew-resize;
+}
+
+.resize-edge.resize-bottom {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  cursor: ns-resize;
+}
+
+.resize-edge.resize-left {
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 4px;
+  cursor: ew-resize;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideLeft {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.deckmap-lasso-count {
+  position: absolute;
+  right: 35px;
+  top: 58px;
+  z-index: 102;
+  background: #23272f;
+  color: #fff;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 14px;
+  box-shadow: 0 1px 4px #0002;
+}
+
+/* 月曆元件樣式已移至 styles/components.css */
+
+/* ===== RC-Slider 覆蓋樣式 ===== */
+.rc-slider {
+  padding: 4px 0;
+  margin: 14px 0;
+}
+
+.rc-slider-track {
+  height: 8px;
+  border-radius: 4px;
+}
+
+.rc-slider-rail {
+  background-color: #2c3746;
+  height: 8px;
+  border-radius: 4px;
+}
+
+.rc-slider-handle {
+  border: 2px solid #38bdf8;
+  background-color: #fff;
+  width: 20px;
+  height: 20px;
+  margin-top: -6px;
+  box-shadow: 0 0 0 0;
+}
+
+.rc-slider-handle:hover,
+.rc-slider-handle:active,
+.rc-slider-handle:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.2);
+}
+
+/* 🔵 slider-hour：保留 glow，只移除 track 藍線，統一高度與底色 */
+.slider-time .rc-slider-track {
+  background-color: transparent !important; /* ✅ 不要藍線 */
+  height: 8px;
+}
+
+.slider-time .rc-slider-rail {
+  background-color: #2c3746; /* ✅ 和下面一樣深灰 */
+  height: 8px;
+}
+
+/* 🟠 統一橘色區間樣式的 rc-slider */
+.slider-orange .rc-slider-track {
+  background-color: #f59e42;
+  height: 8px;
+}
+
+.slider-orange .rc-slider-rail {
+  background-color: #2c3746;
+  height: 8px;
+}
+
+.slider-orange .rc-slider-handle {
+  border: 2px solid #f59e42;
+  background-color: #ffffff;
+  width: 20px;
+  height: 20px;
+  margin-top: -6px;
+  box-shadow: none;
+}
+
+/* Polygon Accordion 列表與按鈕樣式 */
+.polygon-list-item {
+  display: flex;
+  align-items: center;
+  padding: 5px 0;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.18s;
+  margin-bottom: 2px;
+}
+.polygon-list-item.active {
+  background: #212942 !important;
+}
+
+.polygon-list-name {
+  flex: 1;
+  font-weight: 600;
+  color: #38bdf8;
+  font-size: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.polygon-list-name.selected {
+  color: #ffff00;
+}
+
+.polygon-list-points {
+  font-weight: 400;
+  color: #aaa;
+  font-size: 12px;
+  margin-left: 8px;
+}
+
+.polygon-list-points.selected {
+  color: #dde6ed;
+}
+
+.polygon-delete-btn {
+  margin-left: 8px;
+  background: none;
+  border: none;
+  color: #eee9ea;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.15s;
+  padding: 3px 8px;
+}
+.polygon-delete-btn:hover {
+  background: #292b2e;
+  color: #ff5c5c;
+}
+
+.polygon-empty {
+  color: #818;
+}
+
+.polygon-chart-title {
+  color: #38bdf8;
+  margin-bottom: 8px;
+}
+
+.polygon-chart-select {
+  background: #111;
+  color: #fff;
+  border: 1px solid #38bdf8;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  min-width: 100px;
+}
+
+.polygon-chart-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  padding: 16px;
+}
+
+.chart-add-btn {
+  background: #1e293b;
+  color: #38bdf8;
+  border: 1px dashed #38bdf8;
+  padding: 8px 14px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+}
+.chart-add-btn:hover {
+  background: #2c3746;
+}
+
+.imsi-tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 8px;
+  background: #1a1f2e;
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-radius: 4px;
+  min-height: 38px;
+  transition: all 0.2s ease;
+}
+
+.imsi-tag {
+  display: inline-flex;
+  align-items: center;
+  background: #646767;
+  color: #fff;
+  font-size: 14px;
+  padding: 4px 10px;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.imsi-tag:hover {
+  background: #4a4d4d;
+}
+
+.imsi-tag-remove {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  margin-left: 8px;
+  cursor: pointer;
+}
+
+.imsi-tag.disabled {
+  opacity: 0.4;
+  text-decoration: line-through;
+  background: #444;
+}
+
+.polygon-chart-remove-btn {
+  position: absolute;
+  top: 0px;
+  right: 8px;
+  background-color: #666666;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 12px;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+  cursor: pointer;
+  z-index: 10;
+  padding: 0;
+}
+.polygon-chart-remove-btn:hover {
+  background: #2c3746;
+}
+
+.polygon-chart-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.polygon-chart-header {
+  display: flex;
+  height: 36px;
+  flex-direction: column;
+}
+
+.polygon-chart-filters {
+  font-size: 12px;
+  color: #a0aec0;
+  margin-top: 4px;
+}
+
+.polygon-chart-select-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+
+/* 保留原本的 list 設定 */
+.polygon-chart-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: flex-start;
+}
+
+/* 基本設定：預設單欄 */
+.polygon-chart-block {
+  flex: 1 1 100%;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* 當容器寬度足夠且有多個圖表時，自動並排 */
+@media (min-width: 1200px) {
+  .polygon-chart-list:has(.polygon-chart-block:nth-child(2)) .polygon-chart-block {
+    flex: 1 1 calc(50% - 12px);
+    min-width: 400px;
+    max-width: calc(50% - 12px);
+  }
+}
+
+@media (min-width: 1800px) {
+  .polygon-chart-list:has(.polygon-chart-block:nth-child(2)) .polygon-chart-block {
+    flex: 1 1 calc(33.333% - 16px);
+    min-width: 400px;
+    max-width: calc(33.333% - 16px);
+  }
+}
+
+/* emXXXX 元件樣式已移至 styles/components.css */
+
+/* 左側面板 Accordion - 移除邊框 */
+.left-panel-accordion .panel-accordion-body {
+  border: none !important;
+}
+
+/* Accordion header 內的元素樣式 */
+.panel-accordion-header .drag-handle {
+  margin-right: 8px;
+  cursor: move;
+}
+
+.panel-accordion-header .accordion-title {
+  flex: 1;
+}
+

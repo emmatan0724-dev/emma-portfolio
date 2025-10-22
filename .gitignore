@@ -1,0 +1,18 @@
+# Dependencies
+node_modules/
+
+# System files
+.DS_Store
+.claude/
+
+# Backup files
+backup/
+*拷貝.html
+*-backup.html
+
+# Temporary files
+portfolio-data-temp.json
+
+# Server files (如果不需要部署到 GitHub Pages)
+server.js
+generate-with-media.js

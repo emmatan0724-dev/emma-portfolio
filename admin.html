@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emma's Portfolio - 編輯後台</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans TC', Arial, sans-serif;
+            background: #181b23;
+            color: #e2e8f0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #38bdf8;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .section {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .section h2 {
+            color: #38bdf8;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 10px 14px;
+            background: #1a1f2e;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 6px;
+            color: #fff;
+            font-size: 14px;
+            font-family: inherit;
+        }
+
+        textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        button {
+            background: #38bdf8;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background: #0ea5e9;
+            transform: translateY(-1px);
+        }
+
+        button.delete {
+            background: #ef4444;
+        }
+
+        button.delete:hover {
+            background: #dc2626;
+        }
+
+        button.secondary {
+            background: #64748b;
+        }
+
+        button.secondary:hover {
+            background: #475569;
+        }
+
+        .experience-list {
+            margin-top: 20px;
+        }
+
+        .experience-item {
+            background: rgba(15, 23, 42, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+        }
+
+        .experience-title {
+            font-weight: 600;
+            color: #38bdf8;
+            font-size: 16px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 8px;
+        }
+
+        .success-message {
+            background: rgba(34, 197, 94, 0.2);
+            border: 1px solid rgba(34, 197, 94, 0.5);
+            color: #4ade80;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 16px;
+            display: none;
+        }
+
+        .error-message {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid rgba(239, 68, 68, 0.5);
+            color: #f87171;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 16px;
+            display: none;
+        }
+
+        .quick-links {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .quick-links a {
+            color: #38bdf8;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 500;
+        }
+
+        .quick-links a:hover {
+            text-decoration: underline;
+        }
+
+        .edit-form {
+            display: none;
+            margin-top: 16px;
+            padding: 20px;
+            background: rgba(10, 15, 25, 0.6);
+            border-radius: 8px;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+
+        .edit-form.active {
+            display: block;
+        }
+
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .achievements-editor, .testimonials-editor {
+            margin-top: 16px;
+        }
+
+        .achievement-item, .testimonial-item {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .achievement-item input, .testimonial-item textarea {
+            flex: 1;
+        }
+
+        .achievement-item button, .testimonial-item button {
+            padding: 8px 12px;
+            font-size: 12px;
+        }
+
+        .add-btn {
+            margin-top: 8px;
+            font-size: 12px;
+            padding: 6px 12px;
+        }
+
+        .subsection {
+            background: rgba(20, 25, 35, 0.4);
+            padding: 16px;
+            border-radius: 6px;
+            margin-bottom: 16px;
+        }
+
+        .subsection h4 {
+            color: #38bdf8;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📝 Emma's Portfolio - 完整編輯後台</h1>
+
+        <div class="quick-links">
+            <a href="/index.html" target="_blank">🔗 查看履歷（動態版）</a>
+            <a href="/template-c-zigzag.html" target="_blank">🔗 查看履歷（靜態版）</a>
+            <a href="#" onclick="loadData(); return false;">🔄 重新載入資料</a>
+        </div>
+
+        <div id="success" class="success-message"></div>
+        <div id="error" class="error-message"></div>
+
+        <!-- 個人資料編輯 -->
+        <div class="section">
+            <h2>👤 個人資料</h2>
+            <div class="two-columns">
+                <div>
+                    <div class="form-group">
+                        <label>姓名</label>
+                        <input type="text" id="profile-name" placeholder="Emma Tan">
+                    </div>
+                    <div class="form-group">
+                        <label>副標題（中文）</label>
+                        <input type="text" id="profile-subtitle-zh" placeholder="產品策略 × 數據創新 × AI 實踐">
+                    </div>
+                    <div class="form-group">
+                        <label>副標題（英文）</label>
+                        <input type="text" id="profile-subtitle-en" placeholder="Product Strategy × Data Innovation × AI Practice">
+                    </div>
+                </div>
+                <div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="profile-email" placeholder="emmatan0724@gmail.com">
+                    </div>
+                    <div class="form-group">
+                        <label>電話</label>
+                        <input type="text" id="profile-phone" placeholder="+886 972-965-510">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>簡介（中文）</label>
+                <textarea id="profile-desc-zh" placeholder="從韌體工程師到產品經理..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>簡介（英文）</label>
+                <textarea id="profile-desc-en" placeholder="From firmware engineer..."></textarea>
+            </div>
+            <button onclick="saveProfile()">💾 儲存個人資料</button>
+        </div>
+
+        <!-- 工作經歷列表 -->
+        <div class="section">
+            <h2>💼 工作經歷（共 <span id="exp-count">0</span> 筆）</h2>
+            <div id="experience-list" class="experience-list"></div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:3000/api';
+        let currentData = null;
+
+        // 載入資料
+        async function loadData() {
+            try {
+                const response = await fetch(`${API_BASE}/portfolio`);
+                currentData = await response.json();
+
+                // 填充個人資料
+                document.getElementById('profile-name').value = currentData.profile.name || '';
+                document.getElementById('profile-subtitle-zh').value = currentData.profile.subtitle.zh || '';
+                document.getElementById('profile-subtitle-en').value = currentData.profile.subtitle.en || '';
+                document.getElementById('profile-desc-zh').value = currentData.profile.description.zh || '';
+                document.getElementById('profile-desc-en').value = currentData.profile.description.en || '';
+                document.getElementById('profile-email').value = currentData.profile.contact.email || '';
+                document.getElementById('profile-phone').value = currentData.profile.contact.phone || '';
+
+                // 顯示工作經歷
+                renderExperiences();
+                document.getElementById('exp-count').textContent = currentData.experiences.length;
+
+                showSuccess('資料載入成功！');
+            } catch (error) {
+                showError('載入資料失敗：' + error.message);
+            }
+        }
+
+        // 顯示工作經歷列表
+        function renderExperiences() {
+            const container = document.getElementById('experience-list');
+            container.innerHTML = '';
+
+            currentData.experiences.forEach((exp, index) => {
+                const div = document.createElement('div');
+                div.className = 'experience-item';
+                div.id = `exp-${exp.id}`;
+
+                const achievementsZh = exp.achievements.zh || [];
+                const achievementsEn = exp.achievements.en || [];
+                const testimonialsZh = exp.testimonials?.zh || [];
+                const testimonialsEn = exp.testimonials?.en || [];
+
+                div.innerHTML = `
+                    <div class="experience-header">
+                        <div>
+                            <div class="experience-title">${index + 1}. ${exp.title.zh} @ ${exp.company}</div>
+                            <div style="font-size: 12px; color: rgba(255,255,255,0.6);">${exp.period}</div>
+                        </div>
+                        <div class="btn-group">
+                            <button onclick="toggleEdit(${exp.id})">✏️ 展開編輯</button>
+                            <button class="delete" onclick="deleteExperience(${exp.id})">🗑️ 刪除</button>
+                        </div>
+                    </div>
+
+                    <div id="edit-form-${exp.id}" class="edit-form">
+                        <div class="two-columns">
+                            <div class="subsection">
+                                <h4>📅 基本資訊</h4>
+                                <div class="form-group">
+                                    <label>時間區間</label>
+                                    <input type="text" id="period-${exp.id}" value="${exp.period}">
+                                </div>
+                                <div class="form-group">
+                                    <label>公司名稱</label>
+                                    <input type="text" id="company-${exp.id}" value="${exp.company}">
+                                </div>
+                                <div class="form-group">
+                                    <label>職位（中文）</label>
+                                    <input type="text" id="title-zh-${exp.id}" value="${exp.title.zh}">
+                                </div>
+                                <div class="form-group">
+                                    <label>職位（英文）</label>
+                                    <input type="text" id="title-en-${exp.id}" value="${exp.title.en}">
+                                </div>
+                            </div>
+
+                            <div class="subsection">
+                                <h4>💡 職涯意義</h4>
+                                <div class="form-group">
+                                    <label>意義（中文）</label>
+                                    <textarea id="meaning-zh-${exp.id}">${exp.meaning.zh}</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>意義（英文）</label>
+                                    <textarea id="meaning-en-${exp.id}">${exp.meaning.en}</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="subsection">
+                            <h4>🏆 主要成就（中文）</h4>
+                            <div id="achievements-zh-${exp.id}" class="achievements-editor">
+                                ${achievementsZh.map((a, i) => `
+                                    <div class="achievement-item">
+                                        <input type="text" value="${a}" data-idx="${i}">
+                                        <button class="delete" onclick="removeAchievement('zh', ${exp.id}, ${i})">✕</button>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <button class="add-btn secondary" onclick="addAchievement('zh', ${exp.id})">+ 新增成就</button>
+                        </div>
+
+                        <div class="subsection">
+                            <h4>🏆 Key Achievements（英文）</h4>
+                            <div id="achievements-en-${exp.id}" class="achievements-editor">
+                                ${achievementsEn.map((a, i) => `
+                                    <div class="achievement-item">
+                                        <input type="text" value="${a}" data-idx="${i}">
+                                        <button class="delete" onclick="removeAchievement('en', ${exp.id}, ${i})">✕</button>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <button class="add-btn secondary" onclick="addAchievement('en', ${exp.id})">+ Add Achievement</button>
+                        </div>
+
+                        <div class="subsection">
+                            <h4>💬 同事推薦（中文）</h4>
+                            <div id="testimonials-zh-${exp.id}" class="testimonials-editor">
+                                ${testimonialsZh.map((t, i) => `
+                                    <div class="testimonial-item" style="margin-bottom: 12px;">
+                                        <div style="flex: 1;">
+                                            <textarea placeholder="推薦內容" data-idx="${i}" style="margin-bottom: 4px;">${t.text}</textarea>
+                                            <input type="text" placeholder="推薦人" value="${t.author}" data-idx="${i}">
+                                        </div>
+                                        <button class="delete" onclick="removeTestimonial('zh', ${exp.id}, ${i})">✕</button>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <button class="add-btn secondary" onclick="addTestimonial('zh', ${exp.id})">+ 新增推薦</button>
+                        </div>
+
+                        <div class="subsection">
+                            <h4>💬 Testimonials（英文）</h4>
+                            <div id="testimonials-en-${exp.id}" class="testimonials-editor">
+                                ${testimonialsEn.map((t, i) => `
+                                    <div class="testimonial-item" style="margin-bottom: 12px;">
+                                        <div style="flex: 1;">
+                                            <textarea placeholder="Testimonial" data-idx="${i}" style="margin-bottom: 4px;">${t.text}</textarea>
+                                            <input type="text" placeholder="Author" value="${t.author}" data-idx="${i}">
+                                        </div>
+                                        <button class="delete" onclick="removeTestimonial('en', ${exp.id}, ${i})">✕</button>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <button class="add-btn secondary" onclick="addTestimonial('en', ${exp.id})">+ Add Testimonial</button>
+                        </div>
+
+                        <div style="margin-top: 20px; text-align: right;">
+                            <button onclick="saveExperience(${exp.id})">💾 儲存此經歷</button>
+                            <button class="secondary" onclick="toggleEdit(${exp.id})">✕ 收起</button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // 展開/收起編輯表單
+        function toggleEdit(id) {
+            const form = document.getElementById(`edit-form-${id}`);
+            form.classList.toggle('active');
+        }
+
+        // 新增成就
+        function addAchievement(lang, expId) {
+            const container = document.getElementById(`achievements-${lang}-${expId}`);
+            const newIdx = container.children.length;
+            const div = document.createElement('div');
+            div.className = 'achievement-item';
+            div.innerHTML = `
+                <input type="text" placeholder="新成就" data-idx="${newIdx}">
+                <button class="delete" onclick="this.parentElement.remove()">✕</button>
+            `;
+            container.appendChild(div);
+        }
+
+        // 移除成就
+        function removeAchievement(lang, expId, idx) {
+            const container = document.getElementById(`achievements-${lang}-${expId}`);
+            container.children[idx].remove();
+        }
+
+        // 新增推薦
+        function addTestimonial(lang, expId) {
+            const container = document.getElementById(`testimonials-${lang}-${expId}`);
+            const newIdx = container.children.length;
+            const div = document.createElement('div');
+            div.className = 'testimonial-item';
+            div.style.marginBottom = '12px';
+            div.innerHTML = `
+                <div style="flex: 1;">
+                    <textarea placeholder="${lang === 'zh' ? '推薦內容' : 'Testimonial'}" data-idx="${newIdx}" style="margin-bottom: 4px;"></textarea>
+                    <input type="text" placeholder="${lang === 'zh' ? '推薦人' : 'Author'}" data-idx="${newIdx}">
+                </div>
+                <button class="delete" onclick="this.parentElement.remove()">✕</button>
+            `;
+            container.appendChild(div);
+        }
+
+        // 移除推薦
+        function removeTestimonial(lang, expId, idx) {
+            const container = document.getElementById(`testimonials-${lang}-${expId}`);
+            container.children[idx].remove();
+        }
+
+        // 儲存個人資料
+        async function saveProfile() {
+            try {
+                const profileData = {
+                    name: document.getElementById('profile-name').value,
+                    subtitle: {
+                        zh: document.getElementById('profile-subtitle-zh').value,
+                        en: document.getElementById('profile-subtitle-en').value
+                    },
+                    description: {
+                        zh: document.getElementById('profile-desc-zh').value,
+                        en: document.getElementById('profile-desc-en').value
+                    },
+                    contact: {
+                        email: document.getElementById('profile-email').value,
+                        phone: document.getElementById('profile-phone').value
+                    }
+                };
+
+                const response = await fetch(`${API_BASE}/profile`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(profileData)
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    showSuccess('✅ 個人資料已儲存！');
+                    loadData();
+                } else {
+                    showError('儲存失敗');
+                }
+            } catch (error) {
+                showError('儲存失敗：' + error.message);
+            }
+        }
+
+        // 儲存工作經歷
+        async function saveExperience(id) {
+            try {
+                // 收集成就（中文）
+                const achievementsZh = [];
+                document.querySelectorAll(`#achievements-zh-${id} input`).forEach(input => {
+                    if (input.value.trim()) achievementsZh.push(input.value.trim());
+                });
+
+                // 收集成就（英文）
+                const achievementsEn = [];
+                document.querySelectorAll(`#achievements-en-${id} input`).forEach(input => {
+                    if (input.value.trim()) achievementsEn.push(input.value.trim());
+                });
+
+                // 收集推薦（中文）
+                const testimonialsZh = [];
+                const testimonialsZhContainer = document.getElementById(`testimonials-zh-${id}`);
+                Array.from(testimonialsZhContainer.children).forEach(item => {
+                    const textarea = item.querySelector('textarea');
+                    const input = item.querySelector('input');
+                    if (textarea && input && textarea.value.trim()) {
+                        testimonialsZh.push({
+                            text: textarea.value.trim(),
+                            author: input.value.trim()
+                        });
+                    }
+                });
+
+                // 收集推薦（英文）
+                const testimonialsEn = [];
+                const testimonialsEnContainer = document.getElementById(`testimonials-en-${id}`);
+                Array.from(testimonialsEnContainer.children).forEach(item => {
+                    const textarea = item.querySelector('textarea');
+                    const input = item.querySelector('input');
+                    if (textarea && input && textarea.value.trim()) {
+                        testimonialsEn.push({
+                            text: textarea.value.trim(),
+                            author: input.value.trim()
+                        });
+                    }
+                });
+
+                const expData = {
+                    period: document.getElementById(`period-${id}`).value,
+                    company: document.getElementById(`company-${id}`).value,
+                    title: {
+                        zh: document.getElementById(`title-zh-${id}`).value,
+                        en: document.getElementById(`title-en-${id}`).value
+                    },
+                    meaning: {
+                        zh: document.getElementById(`meaning-zh-${id}`).value,
+                        en: document.getElementById(`meaning-en-${id}`).value
+                    },
+                    achievements: {
+                        zh: achievementsZh,
+                        en: achievementsEn
+                    },
+                    testimonials: (testimonialsZh.length > 0 || testimonialsEn.length > 0) ? {
+                        zh: testimonialsZh,
+                        en: testimonialsEn
+                    } : null
+                };
+
+                const response = await fetch(`${API_BASE}/experiences/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(expData)
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    showSuccess(`✅ 工作經歷 #${id} 已更新！`);
+                    loadData();
+                } else {
+                    showError('更新失敗');
+                }
+            } catch (error) {
+                showError('更新失敗：' + error.message);
+            }
+        }
+
+        // 刪除工作經歷
+        async function deleteExperience(id) {
+            if (!confirm('確定要刪除這筆工作經歷嗎？此操作無法復原！')) return;
+
+            try {
+                const response = await fetch(`${API_BASE}/experiences/${id}`, {
+                    method: 'DELETE'
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    showSuccess('✅ 工作經歷已刪除！');
+                    loadData();
+                } else {
+                    showError('刪除失敗');
+                }
+            } catch (error) {
+                showError('刪除失敗：' + error.message);
+            }
+        }
+
+        // 顯示成功訊息
+        function showSuccess(message) {
+            const el = document.getElementById('success');
+            el.textContent = message;
+            el.style.display = 'block';
+            setTimeout(() => el.style.display = 'none', 3000);
+        }
+
+        // 顯示錯誤訊息
+        function showError(message) {
+            const el = document.getElementById('error');
+            el.textContent = message;
+            el.style.display = 'block';
+            setTimeout(() => el.style.display = 'none', 5000);
+        }
+
+        // 初始載入
+        loadData();
+    </script>
+</body>
+</html>

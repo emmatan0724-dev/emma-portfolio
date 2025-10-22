@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emma Tan - Portfolio</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter','Noto Sans TC',Arial,sans-serif;background:#181b23;color:#e2e8f0;line-height:1.6;overflow-x:hidden;scroll-behavior:smooth}
+.lang-switch{position:fixed;top:20px;right:30px;z-index:1000;background:rgba(27,32,48,0.6);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:4px;display:flex;gap:2px}
+.lang-btn{background:transparent;border:none;color:rgba(255,255,255,0.5);cursor:pointer;padding:6px 12px;border-radius:16px;font-weight:400;transition:none;font-size:13px}
+.lang-btn.active{background:rgba(56,189,248,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(56,189,248,0.3)}
+.lang-btn:hover{background:transparent;color:rgba(255,255,255,0.5)}
+.header-section{padding:100px 40px 80px;text-align:center;background:linear-gradient(180deg,#0e101a 0%,#181b23 100%);border-bottom:1px solid rgba(56,189,248,0.2)}
+.header-section h1{font-size:52px;color:#fff;margin-bottom:12px;font-weight:700}
+.header-section .subtitle{font-size:22px;color:#38bdf8;margin-bottom:24px;font-weight:400}
+.header-section .description{font-size:16px;color:rgba(255,255,255,0.7);max-width:600px;margin:0 auto 30px;line-height:1.8}
+.header-section .contact{font-size:14px;color:rgba(255,255,255,0.6)}
+.header-section .contact a{color:#38bdf8;text-decoration:none}
+.accordion-container{max-width:100%;margin:0 auto;padding:60px 0}
+.accordion-item{margin:0 0 2px 0;background:#1b2030;transition:all 0.3s ease;overflow:hidden}
+.accordion-item:hover{background:#1f2536}
+.accordion-header{min-height:48px;display:flex;align-items:center;justify-content:space-between;padding:12px 40px;cursor:pointer;background:linear-gradient(90deg,rgba(56,189,248,0.07) 0%,transparent 60%);transition:all 0.2s ease;user-select:none}
+.accordion-header:hover{background:linear-gradient(90deg,rgba(56,189,248,0.1) 0%,rgba(56,189,248,0.02) 100%)}
+.accordion-item.open .accordion-header{background:linear-gradient(90deg,rgba(56,189,248,0.17) 0%,rgba(56,189,248,0.04) 100%)}
+.accordion-left{display:flex;align-items:center;gap:20px}
+.accordion-year{font-size:13px;color:#38bdf8;font-weight:600;min-width:140px}
+.accordion-title{font-size:16px;color:rgba(255,255,255,0.92);font-weight:400}
+.accordion-item.open .accordion-title{color:#ffffff;font-weight:500}
+.accordion-company{font-size:14px;color:rgba(255,255,255,0.6);margin-left:12px}
+.accordion-arrow{width:8px;height:8px;border-radius:50%;background-color:rgba(255,255,255,0.3);transition:all 0.2s ease}
+.accordion-header:hover .accordion-arrow{background-color:rgba(255,255,255,0.5);transform:scale(1.2)}
+.accordion-item.open .accordion-arrow{background-color:#38bdf8;box-shadow:0 0 6px rgba(56,189,248,0.5)}
+.accordion-body{max-height:0;overflow:hidden;transition:max-height 0.8s cubic-bezier(0.4,0,0.2,1);background:#0f1218;border-left:1px solid rgba(56,189,248,0.25);border-right:1px solid rgba(56,189,248,0.25);border-bottom:1px solid rgba(56,189,248,0.35)}
+.accordion-item.open .accordion-body{max-height:3000px}
+.accordion-body-inner{padding:40px}
+.zigzag-layout{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;grid-template-areas:"content media"}
+.content-area{grid-area:content}
+.media-area{grid-area:media}
+.meaning-block{padding:20px;background:rgba(56,189,248,0.05);border-left:3px solid #38bdf8;border-radius:6px;margin-bottom:30px}
+.meaning-block h4{font-size:13px;color:#38bdf8;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;font-weight:600}
+.meaning-block p{font-size:15px;color:rgba(255,255,255,0.85);line-height:1.8}
+.achievements-block{margin-bottom:30px}
+.achievements-block h4{font-size:13px;color:#38bdf8;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;font-weight:600}
+.achievement-list{list-style:none}
+.achievement-list li{padding:10px 0 10px 24px;position:relative;font-size:14px;color:rgba(255,255,255,0.8);line-height:1.6}
+.achievement-list li::before{content:'▸';position:absolute;left:8px;color:#38bdf8;font-weight:bold}
+.media-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.media-slot{aspect-ratio:16/10;background:rgba(30,41,59,0.6);border:2px dashed rgba(56,189,248,0.3);border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s;gap:10px;overflow:hidden;position:relative}
+.media-slot:hover{border-color:rgba(56,189,248,0.6);background:rgba(56,189,248,0.1)}
+.media-slot.has-media{border-style:solid;background:rgba(15,23,42,0.8);padding:0}
+.media-slot.has-media:hover{border-color:rgba(56,189,248,0.8);transform:scale(1.02)}
+.media-slot img{width:100%;height:100%;object-fit:cover;border-radius:8px}
+.media-slot iframe{width:100%;height:100%;border:none;border-radius:8px}
+.video-thumbnail{position:relative;width:100%;height:100%;cursor:pointer}
+.video-thumbnail img{width:100%;height:100%;object-fit:cover;border-radius:8px}
+.video-thumbnail .play-button{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);opacity:0.9;transition:all 0.3s}
+.video-thumbnail:hover .play-button{opacity:1;transform:translate(-50%,-50%) scale(1.1)}
+.media-icon{font-size:36px}
+.media-label{font-size:13px;color:rgba(255,255,255,0.5)}
+.media-slot.large{grid-column:1/-1}
+.testimonials-block{margin-top:30px;padding-top:30px;border-top:1px solid rgba(56,189,248,0.15)}
+.testimonials-block h4{font-size:13px;color:#38bdf8;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;font-weight:600}
+.testimonial-card{background:rgba(30,41,59,0.4);padding:20px;border-radius:10px;border-left:3px solid rgba(56,189,248,0.5);margin-bottom:14px}
+.testimonial-text{font-size:14px;color:rgba(255,255,255,0.85);font-style:italic;line-height:1.7;margin-bottom:10px}
+.testimonial-author{font-size:12px;color:#38bdf8;text-align:right;font-weight:500}
+.lang-content{display:none}
+.lang-content.active{display:block}
+@media (max-width:1024px){.zigzag-layout{grid-template-columns:1fr;grid-template-areas:"content" "media" !important}.accordion-left{flex-direction:column;align-items:flex-start;gap:8px}.accordion-year{min-width:auto}}
+@media (max-width:768px){.header-section h1{font-size:36px}.header-section .subtitle{font-size:18px}.accordion-header{padding:16px 20px;min-height:auto}.accordion-title{font-size:15px}.accordion-company{font-size:13px}.accordion-body-inner{padding:24px 20px}.media-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="lang-switch">
+<button class="lang-btn active" onclick="switchLang('zh')">中文</button>
+<button class="lang-btn" onclick="switchLang('en')">English</button>
+</div>
+
+<div class="header-section">
+<div class="lang-content active" data-lang="zh">
+<h1>Emma Tan</h1>
+<p class="subtitle">產品策略 × 數據創新 × AI 實踐</p>
+<p class="description">從韌體工程師到產品經理，從創業家到 AI 專案領導者。<br>20 年職涯，用技術與洞察力創造價值。</p>
+<p class="contact"><a href="mailto:emmatan0724@gmail.com">emmatan0724@gmail.com</a> | +886 972-965-510</p>
+</div>
+<div class="lang-content" data-lang="en">
+<h1>Emma Tan</h1>
+<p class="subtitle">Product Strategy × Data Innovation × AI Practice</p>
+<p class="description">From firmware engineer to product manager, from entrepreneur to AI project leader.<br>20 years of career, creating value through technology and insight.</p>
+<p class="contact"><a href="mailto:emmatan0724@gmail.com">emmatan0724@gmail.com</a> | +886 972-965-510</p>
+</div>
+</div>
+
+<div class="accordion-container">
+
+<div class="accordion-item" onclick="toggleAccordion(this)">
+<div class="accordion-header">
+<div class="accordion-left">
+<div class="accordion-year">2024.06 - Present</div>
+<div class="lang-content active" data-lang="zh">
+<span class="accordion-title">資深計劃主持人</span>
+<span class="accordion-company">@ Groundhog Tech</span>
+</div>
+<div class="lang-content" data-lang="en">
+<span class="accordion-title">Senior Program Manager</span>
+<span class="accordion-company">@ Groundhog Tech</span>
+</div>
+</div>
+<div class="accordion-arrow"></div>
+</div>
+<div class="accordion-body">
+<div class="accordion-body-inner">
+<div class="zigzag-layout">
+<div class="content-area">
+<div class="meaning-block">
+<div class="lang-content active" data-lang="zh">
+<h4>💡 職涯意義</h4>
+<p>整合 AI、電信與數據分析技術，推動 RAN 網路智能化，並開拓前瞻應用領域。</p>
+</div>
+<div class="lang-content" data-lang="en">
+<h4>💡 Career Impact</h4>
+<p>Integrating AI, telecom, and data analytics to advance RAN network intelligence and pioneer innovative applications.</p>
+</div>
+</div>
+<div class="achievements-block">
+<div class="lang-content active" data-lang="zh">
+<h4>🏆 主要成就</h4>
+<ul class="achievement-list">
+<li>主導開發 RAN 端 LLM AI 助理，實現自然語言即時操作洞察</li><li>實作 Digital Twin 模擬框架研究與原型開發</li><li>研發 UWB 定位技術，高精度室內定位應用</li><li>設計並實作 DPI，解析核心網路協定，實現端到端電信 KPI 評估</li><li>應用 RealMotion 技術於國家安全、詐欺偵測與精準行銷</li>
+</ul>
+</div>
+<div class="lang-content" data-lang="en">
+<h4>🏆 Key Achievements</h4>
+<ul class="achievement-list">
+<li>Spearheaded RAN-side LLM AI assistant for real-time operational insight via natural language</li><li>Initiated research and prototyping of Digital Twin simulation framework</li><li>Researched and developed UWB positioning technology for high-precision indoor positioning applications</li><li>Designed and implemented DPI to decode core network protocols and enable end-to-end telecom KPI assessment</li><li>Applied RealMotion technology in national security, fraud detection, and marketing targeting</li>
+</ul>
+</div>
+</div>
+
+<div class="testimonials-block">
+<div class="lang-content active" data-lang="zh">
+<h4>💬 同事推薦</h4>
+
+<div class="testimonial-card">
+<p class="testimonial-text">"Emma 在 AI 和電信領域的結合上有獨到的見解，她的專案執行能力極強。"</p>
+<p class="testimonial-author">— 電信協理</p>
+</div>
+
+</div>
+<div class="lang-content" data-lang="en">
+<h4>💬 Testimonials</h4>
+
+<div class="testimonial-card">
+<p class="testimonial-text">"Emma has unique insights in combining AI with telecommunications, with exceptional project execution capabilities."</p>
+<p class="testimonial-author">— Telecom Associate VP</p>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="media-area">
+<div class="media-grid">
+<div class="media-slot has-media" onclick="event.stopPropagation();window.open('https://drive.google.com/file/d/1lhjj9eZ3vBoaj61PF4XFSIyQvJqCtq_c/view?usp=drive_link','_blank')">
+      <img src="https://drive.google.com/thumbnail?id=1lhjj9eZ3vBoaj61PF4XFSIyQvJqCtq_c&sz=w1000" alt="Dashboard" loading="lazy">
+    </div><div class="media-slot" onclick="event.stopPropagation()">
+        <div class="media-icon">🎥</div>
+        <div class="media-label">Demo Video</div>
+      </div><div class="media-slot large" onclick="event.stopPropagation()">
+        <div class="media-icon">📱</div>
+        <div class="media-label">Application Screenshot</div>
+      </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="accordion-item" onclick="toggleAccordion(this)">
+<div class="accordion-header">
+<div class="accordion-left">
+<div class="accordion-year">2022.06 - 2024.06</div>
+<div class="lang-content active" data-lang="zh">
+<span class="accordion-title">產品部門主管 - 電信產品設計 數據分析</span>
+<span class="accordion-company">@ Groundhog Tech</span>
+</div>
+<div class="lang-content" data-lang="en">
+<span class="accordion-title">Product Department Head - Telecom Product Design & Data Analysis</span>
+<span class="accordion-company">@ Groundhog Tech</span>
+</div>
+</div>
+<div class="accordion-arrow"></div>
+</div>
+<div class="accordion-body">
+<div class="accordion-body-inner">
+<div class="zigzag-layout">
+<div class="content-area">
+<div class="meaning-block">
+<div class="lang-content active" data-lang="zh">
+<h4>💡 職涯意義</h4>
+<p>建立電信產品與數據團隊的核心流程，奠定數據驅動決策的基礎架構。</p>
+</div>
+<div class="lang-content" data-lang="en">
+<h4>💡 Career Impact</h4>
+<p>Established core processes for telecom product and data teams, laying the foundation for data-driven decision making.</p>
+</div>
+</div>
+<div class="achievements-block">
+<div class="lang-content active" data-lang="zh">
+<h4>🏆 主要成就</h4>
+<ul class="achievement-list">
+<li>主導產品與數據團隊的流程優化與內部工作流設計</li><li>開發 4G/5G 基站 KPI 評估模型與部署支援系統</li><li>設計用戶體驗、流量分佈、掉話率與頻率規劃評估工具</li><li>標準化國際電信專案交付的資料庫文件</li>
+</ul>
+</div>
+<div class="lang-content" data-lang="en">
+<h4>🏆 Key Achievements</h4>
+<ul class="achievement-list">
+<li>Led process optimization and internal workflow design for product and data teams</li><li>Developed 4G/5G base station KPI evaluation models and deployment support systems</li><li>Designed tools to assess user experience, traffic distribution, drop call rates, and frequency planning</li><li>Standardized database documentation for international telecom project delivery</li>
+</ul>
+</div>
+</div>
+
+</div>
+<div class="media-area">
+<div class="media-grid">
+<div class="media-slot" onclick="event.stopPropagation()">
+        <div class="media-icon">📈</div>
+        <div class="media-label">KPI Model</div>
+      </div><div class="media-slot" onclick="event.stopPropagation()">
+        <div class="media-icon">🗂️</div>
+        <div class="media-label">Documentation</div>
+      </div><div class="media-slot large" onclick="event.stopPropagation()">
+        <div class="media-icon">🌐</div>
+        <div class="media-label">System Architecture</div>
+      </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="accordion-item" onclick="toggleAccordion(this)">
+<div class="accordion-header">
+<div class="accordion-left">
+<div class="accordion-year">2022</div>
+<div class="lang-content active" data-lang="zh">
+<span class="accordion-title">顧問</span>
+<span class="accordion-company">@ iDaka Tech</span>
+</div>
+<div class="lang-content" data-lang="en">
+<span class="accordion-title">Consultant</span>
+<span class="accordion-company">@ iDaka Tech</span>
+</div>
+</div>
+<div class="accordion-arrow"></div>
+</div>
+<div class="accordion-body">
+<div class="accordion-body-inner">
+<div class="zigzag-layout">
+<div class="content-area">
+<div class="meaning-block">
+<div class="lang-content active" data-lang="zh">
+<h4>💡 職涯意義</h4>
+<p>將 IoT 技術應用於工程安全管理，提升工地人員安全與管理效率。</p>
+</div>
+<div class="lang-content" data-lang="en">
+<h4>💡 Career Impact</h4>
+<p>Applied IoT technology to construction safety management, enhancing worker safety and management efficiency.</p>
+</div>
+</div>
+<div class="achievements-block">
+<div class="lang-content active" data-lang="zh">
+<h4>🏆 主要成就</h4>
+<ul class="achievement-list">
+<li>開發隧道施工 IoT 安全管理系統</li><li>整合四用氣體偵測、天氣站、溫濕度監控系統</li><li>研發 UWB 定位技術，實現高精度人員位置管理</li><li>實現即時定位與簽到功能，提升工地安全與人力控管</li>
+</ul>
+</div>
+<div class="lang-content" data-lang="en">
+<h4>🏆 Key Achievements</h4>
+<ul class="achievement-list">
+<li>Developed IoT safety management system for tunnel construction</li><li>Integrated 4-in-1 gas detection, weather station, and temperature/humidity monitoring</li><li>Researched and developed UWB positioning technology for high-precision personnel location management</li><li>Enabled real-time positioning and check-in to enhance construction site safety and workforce control</li>
+</ul>
+</div>
+</div>
+
+</div>
+<div class="media-area">
+<div class="media-grid">
+<div class="media-slot large" onclick="event.stopPropagation()">
+        <div class="media-icon">🏗️</div>
+        <div class="media-label">Construction Site IoT</div>
+      </div><div class="media-slot" onclick="event.stopPropagation()">
+        <div class="media-icon">📡</div>
+        <div class="media-label">Positioning System</div>
+      </div><div class="media-slot" onclick="event.stopPropagation()">
+        <div class="media-icon">🛡️</div>
+        <div class="media-label">Safety System</div>
+      </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="accordion-item" onclick="toggleAccordion(this)">
+<div class="accordion-header">
+<div class="accordion-left">
+<div class="accordion-year">2018.09 - 2022.05</div>
+<div class="lang-content active" data-lang="zh">
+<span class="accordion-title">創辦人暨執行長</span>
+<span class="accordion-company">@ Kidscareer</span>
+</div>
+<div class="lang-content" data-lang="en">
+<span class="accordion-title">Founder & CEO</span>
+<span class="accordion-company">@ Kidscareer</span>
+</div>
+</div>
+<div class="accordion-arrow"></div>
+</div>
+<div class="accordion-body">
+<div class="accordion-body-inner">
+<div class="zigzag-layout">
+<div class="content-area">
+<div class="meaning-block">
+<div class="lang-content active" data-lang="zh">
+<h4>💡 職涯意義</h4>
+<p>從 0 到 1 打造親子活動平台，整合 AR 技術與商業模式，實踐創業家精神與產品全生命週期管理。</p>
+</div>
+<div class="lang-content" data-lang="en">
+<h4>💡 Career Impact</h4>
+<p>Built a family activity platform from scratch, integrating AR technology with business models, embodying entrepreneurial spirit and full product lifecycle management.</p>
+</div>
+</div>
+<div class="achievements-block">
+<div class="lang-content active" data-lang="zh">
+<h4>🏆 主要成就</h4>
+<ul class="achievement-list">
+<li>打造 AR 增強的活動平台，累積 40,000+ 用戶、6,000+ 活動</li><li>網站累積超過 500 萬瀏覽次數</li><li>年營收突破新台幣 1,000 萬元</li><li>合作超過 200 個場館；2019 年榮獲台北市智慧生活實驗室獎項</li>
+</ul>
+</div>
+<div class="lang-content" data-lang="en">
+<h4>🏆 Key Achievements</h4>
+<ul class="achievement-list">
+<li>Built an AR-enhanced activity platform with 40,000+ users and 6,000+ events</li><li>Website accumulated over 5 million views</li><li>Annual revenue exceeded NT$10 million</li><li>Partnered with over 200 locations; won Taipei Living Lab Award in 2019</li>
+</ul>
+</div>
+</div>
+
+<div class="testimonials-block">
+<div class="lang-content active" data-lang="zh">
+<h4>💬 同事推薦</h4>
+
+<div class="testimonial-card">
+<p class="testimonial-text">"Emma 是一位充滿熱情和執行力的創業家，她將複雜的技術轉化為有價值的產品。"</p>
+<p class="testimonial-author">— 合作夥伴</p>
+</div>
+
+</div>
+<div class="lang-content" data-lang="en">
+<h4>💬 Testimonials</h4>
+
+<div class="testimonial-card">
+<p class="testimonial-text">"Emma is a passionate and execution-driven entrepreneur who transforms complex technology into valuable products."</p>
+<p class="testimonial-author">— Business Partner</p>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="media-area">
+<div class="media-grid">
+<div class="media-slot has-media" onclick="event.stopPropagation()">
+      <img src="photo/IMG_4491.jpeg" alt="與總統合照" loading="lazy">
+    </div><div class="media-slot has-media" onclick="event.stopPropagation()">
+      <img src="photo/IMG_9260.jpeg" alt="與總統合照" loading="lazy">
+    </div><div class="media-slot" onclick="event.stopPropagation()">
+        <div class="media-icon">🎥</div>
+        <div class="media-label">AR Demo</div>
+      </div><div class="media-slot" onclick="event.stopPropagation()">
+        <div class="media-icon">📊</div>
+        <div class="media-label">Analytics</div>
+      </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="accordion-item" onclick="toggleAccordion(this)">
+<div class="accordion-header">
+<div class="accordion-left">
+<div class="accordion-year">2017.08 - 2018</div>
+<div class="lang-content active" data-lang="zh">
+<span class="accordion-title">董事長特助</span>
+<span class="accordion-company">@ 104</span>
+</div>
+<div class="lang-content" data-lang="en">
+<span class="accordion-title">Chairman's Special Assistant</span>
+<span class="accordion-company">@ 104</span>
+</div>
+</div>
+<div class="accordion-arrow"></div>
+</div>
+<div class="accordion-body">
+<div class="accordion-body-inner">
+<div class="zigzag-layout">
+<div class="content-area">
+<div class="meaning-block">
+<div class="lang-content active" data-lang="zh">
+<h4>💡 職涯意義</h4>
+<p>帶著兒童職業體驗計畫案進入創新創業家辦公室，進行市場驗證與商業模式探索。</p>
+</div>
+<div class="lang-content" data-lang="en">
+<h4>💡 Career Impact</h4>
+<p>Joined the Innovation and Entrepreneurship Office with a children's career experience project, conducting market validation and business model exploration.</p>
+</div>
+</div>
+<div class="achievements-block">
+<div class="lang-content active" data-lang="zh">
+<h4>🏆 主要成就</h4>
+<ul class="achievement-list">
+<li>帶著兒童職業體驗計畫案進入創新創業家辦公室</li><li>進行市場可行性分析與商業模式開發</li>
+</ul>
+</div>
+<div class="lang-content" data-lang="en">
+<h4>🏆 Key Achievements</h4>
+<ul class="achievement-list">
+<li>Joined Innovation and Entrepreneurship Office with children's career experience project</li><li>Conducted market feasibility analysis and business model development</li>
+</ul>
+</div>
+</div>
+
+</div>
+<div class="media-area">
+<div class="media-grid">
+<div class="media-slot large" onclick="event.stopPropagation()">
+        <div class="media-icon">📊</div>
+        <div class="media-label">Market Analysis</div>
+      </div><div class="media-slot" onclick="event.stopPropagation()">
+        <div class="media-icon">👶</div>
+        <div class="media-label">KIDS Division</div>
+      </div><div class="media-slot" onclick="event.stopPropagation()">
+        <div class="media-icon">📚</div>
+        <div class="media-label">Training Program</div>
+      </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="accordion-item" onclick="toggleAccordion(this)">
+<div class="accordion-header">
+<div class="accordion-left">
+<div class="accordion-year">2015.09 - 2017.08</div>
+<div class="lang-content active" data-lang="zh">
+<span class="accordion-title">創辦人</span>
+<span class="accordion-company">@ Kiidsfun</span>
+</div>
+<div class="lang-content" data-lang="en">
+<span class="accordion-title">Founder</span>
+<span class="accordion-company">@ Kiidsfun</span>
+</div>
+</div>
+<div class="accordion-arrow"></div>
+</div>
+<div class="accordion-body">
+<div class="accordion-body-inner">
+<div class="zigzag-layout">
+<div class="content-area">
+<div class="meaning-block">
+<div class="lang-content active" data-lang="zh">
+<h4>💡 職涯意義</h4>
+<p>創建親子活動媒合平台，整合台灣超過 1,000 個親子吃喝玩樂旅遊資源。</p>
+</div>
+<div class="lang-content" data-lang="en">
+<h4>💡 Career Impact</h4>
+<p>Created a parent-vendor matchmaking platform, integrating over 1,000 parenting dining, entertainment, and travel resources across Taiwan.</p>
+</div>
+</div>
+<div class="achievements-block">
+<div class="lang-content active" data-lang="zh">
+<h4>🏆 主要成就</h4>
+<ul class="achievement-list">
+<li>創建親子活動媒合平台</li><li>榮獲多項新創獎項，並獲選為 iOS/Android 精選應用程式</li><li>整合超過 1,000 個台灣親子吃喝玩樂旅遊資源</li>
+</ul>
+</div>
+<div class="lang-content" data-lang="en">
+<h4>🏆 Key Achievements</h4>
+<ul class="achievement-list">
+<li>Created a parent-vendor matchmaking platform</li><li>Won multiple startup awards and selected as featured app on iOS/Android</li><li>Integrated 1,000+ parenting dining, entertainment, and travel resources in Taiwan</li>
+</ul>
+</div>
+</div>
+
+</div>
+<div class="media-area">
+<div class="media-grid">
+<div class="media-slot large" onclick="event.stopPropagation()">
+        <div class="media-icon">📱</div>
+        <div class="media-label">App Platform</div>
+      </div><div class="media-slot" onclick="event.stopPropagation()">
+        <div class="media-icon">🏆</div>
+        <div class="media-label">Startup Awards</div>
+      </div><div class="media-slot" onclick="event.stopPropagation()">
+        <div class="media-icon">🌟</div>
+        <div class="media-label">Featured App</div>
+      </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="accordion-item" onclick="toggleAccordion(this)">
+<div class="accordion-header">
+<div class="accordion-left">
+<div class="accordion-year">2015.02 - 2015.09</div>
+<div class="lang-content active" data-lang="zh">
+<span class="accordion-title">產品總監</span>
+<span class="accordion-company">@ 活動通 Accupass Taiwan & Beijing</span>
+</div>
+<div class="lang-content" data-lang="en">
+<span class="accordion-title">Product Director</span>
+<span class="accordion-company">@ 活動通 Accupass Taiwan & Beijing</span>
+</div>
+</div>
+<div class="accordion-arrow"></div>
+</div>
+<div class="accordion-body">
+<div class="accordion-body-inner">
+<div class="zigzag-layout">
+<div class="content-area">
+<div class="meaning-block">
+<div class="lang-content active" data-lang="zh">
+<h4>💡 職涯意義</h4>
+<p>領導台灣與北京產品團隊推出新平台，短期內達成月 GMV 150 萬人民幣的成績。</p>
+</div>
+<div class="lang-content" data-lang="en">
+<h4>💡 Career Impact</h4>
+<p>Led product teams in Taiwan and Beijing on new platform release, achieving 1.5M RMB monthly GMV in a short period.</p>
+</div>
+</div>
+<div class="achievements-block">
+<div class="lang-content active" data-lang="zh">
+<h4>🏆 主要成就</h4>
+<ul class="achievement-list">
+<li>領導產品團隊推出新平台</li><li>達成月 GMV 150 萬人民幣</li>
+</ul>
+</div>
+<div class="lang-content" data-lang="en">
+<h4>🏆 Key Achievements</h4>
+<ul class="achievement-list">
+<li>Led product team on new platform release</li><li>Achieved 1.5M RMB monthly GMV</li>
+</ul>
+</div>
+</div>
+
+</div>
+<div class="media-area">
+<div class="media-grid">
+<div class="media-slot large" onclick="event.stopPropagation()">
+        <div class="media-icon">🎫</div>
+        <div class="media-label">Event Platform</div>
+      </div><div class="media-slot" onclick="event.stopPropagation()">
+        <div class="media-icon">📈</div>
+        <div class="media-label">GMV Growth</div>
+      </div><div class="media-slot" onclick="event.stopPropagation()">
+        <div class="media-icon">🚀</div>
+        <div class="media-label">Platform Launch</div>
+      </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="accordion-item" onclick="toggleAccordion(this)">
+<div class="accordion-header">
+<div class="accordion-left">
+<div class="accordion-year">2010.04 - 2015.02</div>
+<div class="lang-content active" data-lang="zh">
+<span class="accordion-title">資深產品經理 / 部門主管</span>
+<span class="accordion-company">@ 訊連科技 CyberLink</span>
+</div>
+<div class="lang-content" data-lang="en">
+<span class="accordion-title">Senior Product Manager / Department Head</span>
+<span class="accordion-company">@ 訊連科技 CyberLink</span>
+</div>
+</div>
+<div class="accordion-arrow"></div>
+</div>
+<div class="accordion-body">
+<div class="accordion-body-inner">
+<div class="zigzag-layout">
+<div class="content-area">
+<div class="meaning-block">
+<div class="lang-content active" data-lang="zh">
+<h4>💡 職涯意義</h4>
+<p>在國際軟體公司磨練產品管理能力，從規劃、設計到市場驗證，打造近億下載量的產品。</p>
+</div>
+<div class="lang-content" data-lang="en">
+<h4>💡 Career Impact</h4>
+<p>Honed product management skills in an international software company, from planning and design to market validation, creating products with nearly 100 million downloads.</p>
+</div>
+</div>
+<div class="achievements-block">
+<div class="lang-content active" data-lang="zh">
+<h4>🏆 主要成就</h4>
+<ul class="achievement-list">
+<li>領導 PhotoDirector，於 2013 及 2014 年連續獲得台灣精品金質獎</li><li>從無到有發想並落地打造 "玩美相機 YouCam Perfect" 與 "玩美彩妝 YouCam Makeup"，累積近億下載量</li><li>領導產品團隊進行設計、分析與路線圖執行</li><li>進行內部培訓並代表產品團隊參與外部研討會與技術講座</li>
+</ul>
+</div>
+<div class="lang-content" data-lang="en">
+<h4>🏆 Key Achievements</h4>
+<ul class="achievement-list">
+<li>Directed PhotoDirector, received Taiwan Excellence Gold Award in 2013 and 2014</li><li>Conceptualized and launched "YouCam Perfect" and "YouCam Makeup" from scratch, achieving nearly 100 million downloads</li><li>Led product teams across design, analytics, and roadmap execution</li><li>Conducted internal trainings and represented product teams in external workshops and tech talks</li>
+</ul>
+</div>
+</div>
+
+</div>
+<div class="media-area">
+<div class="media-grid">
+<div class="media-slot large" onclick="event.stopPropagation()">
+        <div class="media-icon">🏆</div>
+        <div class="media-label">Taiwan Excellence Gold Award</div>
+      </div><div class="media-slot" onclick="event.stopPropagation()">
+        <div class="media-icon">📱</div>
+        <div class="media-label">PhotoDirector</div>
+      </div><div class="media-slot" onclick="event.stopPropagation()">
+        <div class="media-icon">💄</div>
+        <div class="media-label">YouCam Makeup</div>
+      </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="accordion-item" onclick="toggleAccordion(this)">
+<div class="accordion-header">
+<div class="accordion-left">
+<div class="accordion-year">2007.03 - 2010.02</div>
+<div class="lang-content active" data-lang="zh">
+<span class="accordion-title">資深 UX 設計師</span>
+<span class="accordion-company">@ COREL</span>
+</div>
+<div class="lang-content" data-lang="en">
+<span class="accordion-title">Senior UX Designer</span>
+<span class="accordion-company">@ COREL</span>
+</div>
+</div>
+<div class="accordion-arrow"></div>
+</div>
+<div class="accordion-body">
+<div class="accordion-body-inner">
+<div class="zigzag-layout">
+<div class="content-area">
+<div class="meaning-block">
+<div class="lang-content active" data-lang="zh">
+<h4>💡 職涯意義</h4>
+<p>從韌體工程師轉型為 UX 設計師，開啟使用者體驗設計職涯。</p>
+</div>
+<div class="lang-content" data-lang="en">
+<h4>💡 Career Impact</h4>
+<p>Transitioned from firmware engineer to UX designer, beginning user experience design career.</p>
+</div>
+</div>
+<div class="achievements-block">
+<div class="lang-content active" data-lang="zh">
+<h4>🏆 主要成就</h4>
+<ul class="achievement-list">
+<li>設計圖形與多媒體軟體的使用者介面</li><li>實踐多種 UX 研究方法：實境訪談、問卷調查、情境調查、使用者經驗測試</li><li>從技術背景成功轉型至設計領域</li>
+</ul>
+</div>
+<div class="lang-content" data-lang="en">
+<h4>🏆 Key Achievements</h4>
+<ul class="achievement-list">
+<li>Designed user interfaces for graphics and multimedia software</li><li>Implemented various UX research methods: field interviews, surveys, contextual inquiry, and user experience testing</li><li>Successfully transitioned from technical background to design field</li>
+</ul>
+</div>
+</div>
+
+</div>
+<div class="media-area">
+<div class="media-grid">
+<div class="media-slot large" onclick="event.stopPropagation()">
+        <div class="media-icon">🎨</div>
+        <div class="media-label">UI Design Work</div>
+      </div><div class="media-slot" onclick="event.stopPropagation()">
+        <div class="media-icon">💻</div>
+        <div class="media-label">Graphics Software</div>
+      </div><div class="media-slot" onclick="event.stopPropagation()">
+        <div class="media-icon">✏️</div>
+        <div class="media-label">Design System</div>
+      </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="accordion-item" onclick="toggleAccordion(this)">
+<div class="accordion-header">
+<div class="accordion-left">
+<div class="accordion-year">2005.05 - 2007.02</div>
+<div class="lang-content active" data-lang="zh">
+<span class="accordion-title">韌體工程師</span>
+<span class="accordion-company">@ ASUS / LITEON-IT</span>
+</div>
+<div class="lang-content" data-lang="en">
+<span class="accordion-title">Firmware Engineer</span>
+<span class="accordion-company">@ ASUS / LITEON-IT</span>
+</div>
+</div>
+<div class="accordion-arrow"></div>
+</div>
+<div class="accordion-body">
+<div class="accordion-body-inner">
+<div class="zigzag-layout">
+<div class="content-area">
+<div class="meaning-block">
+<div class="lang-content active" data-lang="zh">
+<h4>💡 職涯意義</h4>
+<p>職涯起點，從研究所畢業後開始韌體開發工作，在世界級硬體公司累積 ARM 韌體開發經驗，奠定技術基礎。</p>
+</div>
+<div class="lang-content" data-lang="en">
+<h4>💡 Career Impact</h4>
+<p>Career starting point, began firmware development after graduate school, gained ARM firmware development experience at world-class hardware companies, establishing technical foundation.</p>
+</div>
+</div>
+<div class="achievements-block">
+<div class="lang-content active" data-lang="zh">
+<h4>🏆 主要成就</h4>
+<ul class="achievement-list">
+<li>ASUS (2006-2007): ARM 韌體工程師，開發廣告介面系統</li><li>LITEON-IT (2005-2006): ARM 韌體工程師，開發 DVD 播放器 UI 與系統整合</li><li>參與系統底層開發與完整產品開發週期</li>
+</ul>
+</div>
+<div class="lang-content" data-lang="en">
+<h4>🏆 Key Achievements</h4>
+<ul class="achievement-list">
+<li>ASUS (2006-2007): ARM-based firmware engineer for advertisement interface systems</li><li>LITEON-IT (2005-2006): ARM firmware engineer, developed DVD player UI and system integration</li><li>Participated in system-level development and complete product development cycle</li>
+</ul>
+</div>
+</div>
+
+</div>
+<div class="media-area">
+<div class="media-grid">
+<div class="media-slot large" onclick="event.stopPropagation()">
+        <div class="media-icon">⚙️</div>
+        <div class="media-label">ARM Firmware</div>
+      </div><div class="media-slot" onclick="event.stopPropagation()">
+        <div class="media-icon">💿</div>
+        <div class="media-label">DVD Player</div>
+      </div><div class="media-slot" onclick="event.stopPropagation()">
+        <div class="media-icon">🔧</div>
+        <div class="media-label">System Integration</div>
+      </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+
+<script>
+function toggleAccordion(item) {
+  const allItems = document.querySelectorAll('.accordion-item');
+  const wasOpen = item.classList.contains('open');
+  allItems.forEach(i => {
+    if (i !== item) {
+      i.classList.remove('open');
+    }
+  });
+  if (!wasOpen) {
+    item.classList.add('open');
+    setTimeout(() => {
+      const header = item.querySelector('.accordion-header');
+      header.scrollIntoView({behavior: 'smooth', block: 'start'});
+    }, 300);
+  } else {
+    item.classList.remove('open');
+  }
+}
+
+let currentLang = 'zh';
+function switchLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  event.target.classList.add('active');
+  document.querySelectorAll('.lang-content').forEach(content => {
+    if (content.dataset.lang === lang) {
+      content.classList.add('active');
+    } else {
+      content.classList.remove('active');
+    }
+  });
+}
+
+// 點擊縮圖播放影片
+document.addEventListener('click', function(e) {
+  const thumbnail = e.target.closest('.video-thumbnail');
+  if (thumbnail) {
+    e.stopPropagation();
+    const videoUrl = thumbnail.dataset.videoUrl;
+    if (videoUrl) {
+      // 創建 iframe 替換縮圖
+      const iframe = document.createElement('iframe');
+      iframe.src = videoUrl;
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      iframe.style.width = '100%';
+      iframe.style.height = '100%';
+      iframe.style.border = 'none';
+      iframe.style.borderRadius = '8px';
+
+      // 替換內容
+      thumbnail.parentElement.innerHTML = '';
+      thumbnail.parentElement.appendChild(iframe);
+    }
+  }
+});
+</script>
+</body>
+</html>

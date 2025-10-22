@@ -1,0 +1,528 @@
+{
+  "profile": {
+    "name": "Emma Tan",
+    "subtitle": {
+      "zh": "產品策略 × 數據創新 × AI 實踐",
+      "en": "Product Strategy × Data Innovation × AI Practice"
+    },
+    "description": {
+      "zh": "從韌體工程師到產品經理，從創業家到 AI 專案領導者。<br>20 年職涯，用技術與洞察力創造價值。",
+      "en": "From firmware engineer to product manager, from entrepreneur to AI project leader.<br>20 years of career, creating value through technology and insight."
+    },
+    "contact": {
+      "email": "emmatan0724@gmail.com",
+      "phone": "+886 972-965-510"
+    }
+  },
+  "experiences": [
+    {
+      "id": 1,
+      "period": "2024.06 - Present",
+      "title": {
+        "zh": "資深計劃主持人",
+        "en": "Senior Program Manager"
+      },
+      "company": "Groundhog Tech",
+      "meaning": {
+        "zh": "整合 AI、電信與數據分析技術，推動 RAN 網路智能化，並開拓前瞻應用領域。",
+        "en": "Integrating AI, telecom, and data analytics to advance RAN network intelligence and pioneer innovative applications."
+      },
+      "achievements": {
+        "zh": [
+          "主導開發 RAN 端 LLM AI 助理，實現自然語言即時操作洞察",
+          "實作 Digital Twin 模擬框架研究與原型開發",
+          "研發 UWB 定位技術，高精度室內定位應用",
+          "設計並實作 DPI，解析核心網路協定，實現端到端電信 KPI 評估",
+          "應用 RealMotion 技術於國家安全、詐欺偵測與精準行銷"
+        ],
+        "en": [
+          "Spearheaded RAN-side LLM AI assistant for real-time operational insight via natural language",
+          "Initiated research and prototyping of Digital Twin simulation framework",
+          "Researched and developed UWB positioning technology for high-precision indoor positioning applications",
+          "Designed and implemented DPI to decode core network protocols and enable end-to-end telecom KPI assessment",
+          "Applied RealMotion technology in national security, fraud detection, and marketing targeting"
+        ]
+      },
+      "media": [
+        {
+          "type": "image",
+          "icon": "📊",
+          "label": "Dashboard",
+          "url": "https://drive.google.com/file/d/1lhjj9eZ3vBoaj61PF4XFSIyQvJqCtq_c/view?usp=drive_link"
+        },
+        {
+          "type": "video",
+          "icon": "🎥",
+          "label": "Demo Video",
+          "url": ""
+        },
+        {
+          "type": "image",
+          "icon": "📱",
+          "label": "Application Screenshot",
+          "url": "",
+          "large": true
+        }
+      ],
+      "testimonials": {
+        "zh": [
+          {
+            "text": "Emma 在 AI 和電信領域的結合上有獨到的見解，她的專案執行能力極強。",
+            "author": "電信協理"
+          }
+        ],
+        "en": [
+          {
+            "text": "Emma has unique insights in combining AI with telecommunications, with exceptional project execution capabilities.",
+            "author": "Telecom Associate VP"
+          }
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "period": "2022.06 - 2024.06",
+      "title": {
+        "zh": "產品部門主管 - 電信產品設計 數據分析",
+        "en": "Product Department Head - Telecom Product Design & Data Analysis"
+      },
+      "company": "Groundhog Tech",
+      "meaning": {
+        "zh": "建立電信產品與數據團隊的核心流程，奠定數據驅動決策的基礎架構。",
+        "en": "Established core processes for telecom product and data teams, laying the foundation for data-driven decision making."
+      },
+      "achievements": {
+        "zh": [
+          "主導產品與數據團隊的流程優化與內部工作流設計",
+          "開發 4G/5G 基站 KPI 評估模型與部署支援系統",
+          "設計用戶體驗、流量分佈、掉話率與頻率規劃評估工具",
+          "標準化國際電信專案交付的資料庫文件"
+        ],
+        "en": [
+          "Led process optimization and internal workflow design for product and data teams",
+          "Developed 4G/5G base station KPI evaluation models and deployment support systems",
+          "Designed tools to assess user experience, traffic distribution, drop call rates, and frequency planning",
+          "Standardized database documentation for international telecom project delivery"
+        ]
+      },
+      "media": [
+        {
+          "type": "image",
+          "icon": "📈",
+          "label": "KPI Model",
+          "url": ""
+        },
+        {
+          "type": "image",
+          "icon": "🗂️",
+          "label": "Documentation",
+          "url": ""
+        },
+        {
+          "type": "image",
+          "icon": "🌐",
+          "label": "System Architecture",
+          "url": "",
+          "large": true
+        }
+      ],
+      "testimonials": null
+    },
+    {
+      "id": 3,
+      "period": "2022",
+      "title": {
+        "zh": "顧問",
+        "en": "Consultant"
+      },
+      "company": "iDaka Tech",
+      "meaning": {
+        "zh": "將 IoT 技術應用於工程安全管理，提升工地人員安全與管理效率。",
+        "en": "Applied IoT technology to construction safety management, enhancing worker safety and management efficiency."
+      },
+      "achievements": {
+        "zh": [
+          "開發隧道施工 IoT 安全管理系統",
+          "整合四用氣體偵測、天氣站、溫濕度監控系統",
+          "研發 UWB 定位技術，實現高精度人員位置管理",
+          "實現即時定位與簽到功能，提升工地安全與人力控管"
+        ],
+        "en": [
+          "Developed IoT safety management system for tunnel construction",
+          "Integrated 4-in-1 gas detection, weather station, and temperature/humidity monitoring",
+          "Researched and developed UWB positioning technology for high-precision personnel location management",
+          "Enabled real-time positioning and check-in to enhance construction site safety and workforce control"
+        ]
+      },
+      "media": [
+        {
+          "type": "image",
+          "icon": "🏗️",
+          "label": "Construction Site IoT",
+          "url": "",
+          "large": true
+        },
+        {
+          "type": "image",
+          "icon": "📡",
+          "label": "Positioning System",
+          "url": ""
+        },
+        {
+          "type": "image",
+          "icon": "🛡️",
+          "label": "Safety System",
+          "url": ""
+        }
+      ],
+      "testimonials": null
+    },
+    {
+      "id": 4,
+      "period": "2018.09 - 2022.05",
+      "title": {
+        "zh": "創辦人暨執行長",
+        "en": "Founder & CEO"
+      },
+      "company": "Kidscareer",
+      "meaning": {
+        "zh": "從 0 到 1 打造親子活動平台，整合 AR 技術與商業模式，實踐創業家精神與產品全生命週期管理。",
+        "en": "Built a family activity platform from scratch, integrating AR technology with business models, embodying entrepreneurial spirit and full product lifecycle management."
+      },
+      "achievements": {
+        "zh": [
+          "打造 AR 增強的活動平台，累積 40,000+ 用戶、6,000+ 活動",
+          "網站累積超過 500 萬瀏覽次數",
+          "年營收突破新台幣 1,000 萬元",
+          "合作超過 200 個場館；2019 年榮獲台北市智慧生活實驗室獎項"
+        ],
+        "en": [
+          "Built an AR-enhanced activity platform with 40,000+ users and 6,000+ events",
+          "Website accumulated over 5 million views",
+          "Annual revenue exceeded NT$10 million",
+          "Partnered with over 200 locations; won Taipei Living Lab Award in 2019"
+        ]
+      },
+      "media": [
+        {
+          "type": "image",
+          "icon": "📱",
+          "label": "App UI",
+          "url": ""
+        },
+        {
+          "type": "video",
+          "icon": "🎥",
+          "label": "AR Demo",
+          "url": ""
+        },
+        {
+          "type": "image",
+          "icon": "🏆",
+          "label": "Award Photo",
+          "url": ""
+        },
+        {
+          "type": "image",
+          "icon": "📊",
+          "label": "Analytics",
+          "url": ""
+        }
+      ],
+      "testimonials": {
+        "zh": [
+          {
+            "text": "Emma 是一位充滿熱情和執行力的創業家，她將複雜的技術轉化為有價值的產品。",
+            "author": "合作夥伴"
+          }
+        ],
+        "en": [
+          {
+            "text": "Emma is a passionate and execution-driven entrepreneur who transforms complex technology into valuable products.",
+            "author": "Business Partner"
+          }
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "period": "2017.08 - 2018",
+      "title": {
+        "zh": "董事長特助",
+        "en": "Chairman's Special Assistant"
+      },
+      "company": "104",
+      "meaning": {
+        "zh": "帶著兒童職業體驗計畫案進入創新創業家辦公室，進行市場驗證與商業模式探索。",
+        "en": "Joined the Innovation and Entrepreneurship Office with a children's career experience project, conducting market validation and business model exploration."
+      },
+      "achievements": {
+        "zh": [
+          "帶著兒童職業體驗計畫案進入創新創業家辦公室",
+          "進行市場可行性分析與商業模式開發"
+        ],
+        "en": [
+          "Joined Innovation and Entrepreneurship Office with children's career experience project",
+          "Conducted market feasibility analysis and business model development"
+        ]
+      },
+      "media": [
+        {
+          "type": "image",
+          "icon": "📊",
+          "label": "Market Analysis",
+          "url": "",
+          "large": true
+        },
+        {
+          "type": "image",
+          "icon": "👶",
+          "label": "KIDS Division",
+          "url": ""
+        },
+        {
+          "type": "image",
+          "icon": "📚",
+          "label": "Training Program",
+          "url": ""
+        }
+      ],
+      "testimonials": null
+    },
+    {
+      "id": 6,
+      "period": "2015.09 - 2017.08",
+      "title": {
+        "zh": "創辦人",
+        "en": "Founder"
+      },
+      "company": "Kiidsfun",
+      "meaning": {
+        "zh": "創建親子活動媒合平台，整合台灣超過 1,000 個親子吃喝玩樂旅遊資源。",
+        "en": "Created a parent-vendor matchmaking platform, integrating over 1,000 parenting dining, entertainment, and travel resources across Taiwan."
+      },
+      "achievements": {
+        "zh": [
+          "創建親子活動媒合平台",
+          "榮獲多項新創獎項，並獲選為 iOS/Android 精選應用程式",
+          "整合超過 1,000 個台灣親子吃喝玩樂旅遊資源"
+        ],
+        "en": [
+          "Created a parent-vendor matchmaking platform",
+          "Won multiple startup awards and selected as featured app on iOS/Android",
+          "Integrated 1,000+ parenting dining, entertainment, and travel resources in Taiwan"
+        ]
+      },
+      "media": [
+        {
+          "type": "image",
+          "icon": "📱",
+          "label": "App Platform",
+          "url": "",
+          "large": true
+        },
+        {
+          "type": "image",
+          "icon": "🏆",
+          "label": "Startup Awards",
+          "url": ""
+        },
+        {
+          "type": "image",
+          "icon": "🌟",
+          "label": "Featured App",
+          "url": ""
+        }
+      ],
+      "testimonials": null
+    },
+    {
+      "id": 7,
+      "period": "2015.02 - 2015.09",
+      "title": {
+        "zh": "產品總監",
+        "en": "Product Director"
+      },
+      "company": "活動通 Accupass Taiwan & Beijing",
+      "meaning": {
+        "zh": "領導台灣與北京產品團隊推出新平台，短期內達成月 GMV 150 萬人民幣的成績。",
+        "en": "Led product teams in Taiwan and Beijing on new platform release, achieving 1.5M RMB monthly GMV in a short period."
+      },
+      "achievements": {
+        "zh": [
+          "領導產品團隊推出新平台",
+          "達成月 GMV 150 萬人民幣"
+        ],
+        "en": [
+          "Led product team on new platform release",
+          "Achieved 1.5M RMB monthly GMV"
+        ]
+      },
+      "media": [
+        {
+          "type": "image",
+          "icon": "🎫",
+          "label": "Event Platform",
+          "url": "",
+          "large": true
+        },
+        {
+          "type": "image",
+          "icon": "📈",
+          "label": "GMV Growth",
+          "url": ""
+        },
+        {
+          "type": "image",
+          "icon": "🚀",
+          "label": "Platform Launch",
+          "url": ""
+        }
+      ],
+      "testimonials": null
+    },
+    {
+      "id": 8,
+      "period": "2010.04 - 2015.02",
+      "title": {
+        "zh": "資深產品經理 / 部門主管",
+        "en": "Senior Product Manager / Department Head"
+      },
+      "company": "訊連科技 CyberLink",
+      "meaning": {
+        "zh": "在國際軟體公司磨練產品管理能力，從規劃、設計到市場驗證，打造近億下載量的產品。",
+        "en": "Honed product management skills in an international software company, from planning and design to market validation, creating products with nearly 100 million downloads."
+      },
+      "achievements": {
+        "zh": [
+          "領導 PhotoDirector，於 2013 及 2014 年連續獲得台灣精品金質獎",
+          "從無到有發想並落地打造 \"玩美相機 YouCam Perfect\" 與 \"玩美彩妝 YouCam Makeup\"，累積近億下載量",
+          "領導產品團隊進行設計、分析與路線圖執行",
+          "進行內部培訓並代表產品團隊參與外部研討會與技術講座"
+        ],
+        "en": [
+          "Directed PhotoDirector, received Taiwan Excellence Gold Award in 2013 and 2014",
+          "Conceptualized and launched \"YouCam Perfect\" and \"YouCam Makeup\" from scratch, achieving nearly 100 million downloads",
+          "Led product teams across design, analytics, and roadmap execution",
+          "Conducted internal trainings and represented product teams in external workshops and tech talks"
+        ]
+      },
+      "media": [
+        {
+          "type": "image",
+          "icon": "🏆",
+          "label": "Taiwan Excellence Gold Award",
+          "url": "",
+          "large": true
+        },
+        {
+          "type": "image",
+          "icon": "📱",
+          "label": "PhotoDirector",
+          "url": ""
+        },
+        {
+          "type": "image",
+          "icon": "💄",
+          "label": "YouCam Makeup",
+          "url": ""
+        }
+      ],
+      "testimonials": null
+    },
+    {
+      "id": 9,
+      "period": "2007.03 - 2010.02",
+      "title": {
+        "zh": "資深 UX 設計師",
+        "en": "Senior UX Designer"
+      },
+      "company": "COREL",
+      "meaning": {
+        "zh": "從韌體工程師轉型為 UX 設計師，開啟使用者體驗設計職涯。",
+        "en": "Transitioned from firmware engineer to UX designer, beginning user experience design career."
+      },
+      "achievements": {
+        "zh": [
+          "設計圖形與多媒體軟體的使用者介面",
+          "實踐多種 UX 研究方法：實境訪談、問卷調查、情境調查、使用者經驗測試",
+          "從技術背景成功轉型至設計領域"
+        ],
+        "en": [
+          "Designed user interfaces for graphics and multimedia software",
+          "Implemented various UX research methods: field interviews, surveys, contextual inquiry, and user experience testing",
+          "Successfully transitioned from technical background to design field"
+        ]
+      },
+      "media": [
+        {
+          "type": "image",
+          "icon": "🎨",
+          "label": "UI Design Work",
+          "url": "",
+          "large": true
+        },
+        {
+          "type": "image",
+          "icon": "💻",
+          "label": "Graphics Software",
+          "url": ""
+        },
+        {
+          "type": "image",
+          "icon": "✏️",
+          "label": "Design System",
+          "url": ""
+        }
+      ],
+      "testimonials": null
+    },
+    {
+      "id": 10,
+      "period": "2005.05 - 2007.02",
+      "title": {
+        "zh": "韌體工程師",
+        "en": "Firmware Engineer"
+      },
+      "company": "ASUS / LITEON-IT",
+      "meaning": {
+        "zh": "職涯起點，從研究所畢業後開始韌體開發工作，在世界級硬體公司累積 ARM 韌體開發經驗，奠定技術基礎。",
+        "en": "Career starting point, began firmware development after graduate school, gained ARM firmware development experience at world-class hardware companies, establishing technical foundation."
+      },
+      "achievements": {
+        "zh": [
+          "ASUS (2006-2007): ARM 韌體工程師，開發廣告介面系統",
+          "LITEON-IT (2005-2006): ARM 韌體工程師，開發 DVD 播放器 UI 與系統整合",
+          "參與系統底層開發與完整產品開發週期"
+        ],
+        "en": [
+          "ASUS (2006-2007): ARM-based firmware engineer for advertisement interface systems",
+          "LITEON-IT (2005-2006): ARM firmware engineer, developed DVD player UI and system integration",
+          "Participated in system-level development and complete product development cycle"
+        ]
+      },
+      "media": [
+        {
+          "type": "image",
+          "icon": "⚙️",
+          "label": "ARM Firmware",
+          "url": "",
+          "large": true
+        },
+        {
+          "type": "image",
+          "icon": "💿",
+          "label": "DVD Player",
+          "url": ""
+        },
+        {
+          "type": "image",
+          "icon": "🔧",
+          "label": "System Integration",
+          "url": ""
+        }
+      ],
+      "testimonials": null
+    }
+  ]
+}
