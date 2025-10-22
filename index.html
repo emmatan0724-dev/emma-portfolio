@@ -51,6 +51,7 @@ body{font-family:'Inter','Noto Sans TC',Arial,sans-serif;background:#181b23;colo
 .media-slot.has-media{border-style:solid;background:rgba(15,23,42,0.8);padding:0}
 .media-slot.has-media:hover{border-color:rgba(56,189,248,0.8);transform:scale(1.02)}
 .media-slot img{width:100%;height:100%;object-fit:cover;border-radius:8px}
+.media-slot img.contain{object-fit:contain}
 .media-slot iframe{width:100%;height:100%;border:none;border-radius:8px}
 .video-thumbnail{position:relative;width:100%;height:100%;cursor:pointer}
 .video-thumbnail img{width:100%;height:100%;object-fit:cover;border-radius:8px}
@@ -80,13 +81,13 @@ body{font-family:'Inter','Noto Sans TC',Arial,sans-serif;background:#181b23;colo
 <div class="lang-content active" data-lang="zh">
 <h1>Emma Tan</h1>
 <p class="subtitle">產品策略 × 數據創新 × AI 實踐</p>
-<p class="description">從韌體工程師到產品經理，從創業家到 AI 專案領導者。<br>20 年職涯，用技術與洞察力創造價值。</p>
+<p class="description">技術與藝術的跨界整合者，20 年深度淬鍊橫跨韌體、產品、創業到 AI 前沿。<br>以系統思維統籌技術創新、商業策略與美學實踐，引領跨領域協作創造突破性價值。</p>
 <p class="contact"><a href="mailto:emmatan0724@gmail.com">emmatan0724@gmail.com</a> | +886 972-965-510</p>
 </div>
 <div class="lang-content" data-lang="en">
 <h1>Emma Tan</h1>
 <p class="subtitle">Product Strategy × Data Innovation × AI Practice</p>
-<p class="description">From firmware engineer to product manager, from entrepreneur to AI project leader.<br>20 years of career, creating value through technology and insight.</p>
+<p class="description">Cross-disciplinary integrator of technology and art, refined through 20 years spanning firmware, product, entrepreneurship, and AI frontiers.<br>Orchestrating technical innovation, business strategy, and aesthetic practice with systems thinking to lead breakthrough value creation across domains.</p>
 <p class="contact"><a href="mailto:emmatan0724@gmail.com">emmatan0724@gmail.com</a> | +886 972-965-510</p>
 </div>
 </div>
@@ -375,9 +376,9 @@ body{font-family:'Inter','Noto Sans TC',Arial,sans-serif;background:#181b23;colo
 <div class="media-area">
 <div class="media-grid">
 <div class="media-slot has-media" onclick="event.stopPropagation()">
-      <img src="photo/IMG_4491.jpeg" alt="與總統合照" loading="lazy">
+      <img src="photo/IMG_4491.jpeg" alt="與總統合照" class="contain" loading="lazy">
     </div><div class="media-slot has-media" onclick="event.stopPropagation()">
-      <img src="photo/IMG_9260.jpeg" alt="與總統合照" loading="lazy">
+      <img src="photo/IMG_9260.jpeg" alt="與總統合照" class="contain" loading="lazy">
     </div><div class="media-slot" onclick="event.stopPropagation()">
         <div class="media-icon">🎥</div>
         <div class="media-label">AR Demo</div>
@@ -769,6 +770,137 @@ body{font-family:'Inter','Noto Sans TC',Arial,sans-serif;background:#181b23;colo
         <div class="media-icon">🔧</div>
         <div class="media-label">System Integration</div>
       </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class="accordion-item" onclick="toggleAccordion(this)">
+<div class="accordion-header">
+<div class="accordion-left">
+<div class="accordion-year">Life & Interests</div>
+<div class="lang-content active" data-lang="zh">
+<span class="accordion-title">興趣愛好</span>
+</div>
+<div class="lang-content" data-lang="en">
+<span class="accordion-title">Hobbies & Interests</span>
+</div>
+</div>
+<div class="accordion-arrow"></div>
+</div>
+<div class="accordion-body">
+<div class="accordion-body-inner">
+<div class="lang-content active" data-lang="zh">
+<div class="meaning-block">
+<h4>💡 生活哲學</h4>
+<p>我相信生活的豐富度來自於多元的體驗與持續的探索。從底層韌體到產品策略，從創業實踐到 AI 技術前沿，20 年的專業淬鍊始終保持對創新的熱情與洞察力。工作之外，我在科技與自然之間找到平衡，透過藝術創作、生態觀察、空間設計和動手實作，讓技術思維與生活美學相互滋養、融會貫通。</p>
+</div>
+
+<div class="achievements-block">
+<h4>🎨 藝術與創作</h4>
+<ul class="achievement-list">
+<li><strong>繪畫創作</strong> - 從小熱愛繪畫，用畫筆記錄生活中的美好瞬間與天馬行空的想像。無論是水彩、素描還是數位繪圖，創作過程對我來說是一種療癒與自我對話的方式。透過色彩與線條，我學會了觀察細節、表達情感，這種美學敏感度也影響了我在產品設計上的視覺思維。</li>
+</ul>
+</div>
+
+<div class="achievements-block">
+<h4>🌿 自然與生態</h4>
+<ul class="achievement-list">
+<li><strong>飼養鳥類</strong> - 家中養了幾隻活潑的羽毛朋友，每天觀察牠們的互動、學習牠們的習性，是我繁忙工作之餘最放鬆的時刻。照顧鳥類讓我學會傾聽、耐心，以及尊重每個生命的獨特性格。為了更好地照顧牠們，我在寵物室建置了 IoT 環境監控系統，包含溫濕度感測、空氣品質監測與自動化控制，讓我即使出門在外也能即時掌握寵物的生活環境。</li>
+<li><strong>飼養烏龜</strong> - 烏龜的慢節奏生活提醒著我，不是所有事情都需要快速完成。在照顧龜類的過程中，我體會到「慢」的哲學—耐心觀察、細心照料，以及長期陪伴的意義。寵物室的 IoT 系統也包含了水質監測與溫度控制，確保烏龜有最適合的生活環境。</li>
+<li><strong>種植果樹</strong> - 從選購樹苗、土壤改良、施肥灌溉到修剪管理，親手種植果樹讓我體驗了「從種子到果實」的完整過程。看著一棵樹從幼苗成長到開花結果，那份等待與收穫的喜悅，就像打造一個產品從 MVP 到成熟的歷程。我為果樹溫室建置了完整的 IoT 智能管理系統，整合土壤濕度感測、自動灌溉、溫濕度監控、光照控制等功能，透過數據分析優化植物生長條件，將數據驅動的思維應用在農業實踐上。</li>
+</ul>
+</div>
+
+<div class="achievements-block">
+<h4>🏗️ 空間設計與實作</h4>
+<ul class="achievement-list">
+<li><strong>室內設計</strong> - 曾親自操刀多個室內設計案，從空間規劃、風格定調、材質選擇到家具配置，我享受將抽象的生活想像轉化為具體空間的過程。設計不只是美觀，更要考慮動線、機能、收納與使用者體驗—這與產品設計的思維不謀而合。</li>
+<li><strong>DIY 動手做</strong> - 從韌體開發的技術背景出發，我不只停留在設計層面，更熱衷親自動手實作。無論是室內配線、水管接駁、家具組裝，甚至小型木工項目，我都樂於挑戰。這種「從零到一」動手打造的過程，讓我深刻理解實作的細節與問題解決的樂趣。遇到問題時，我會系統化拆解、研究原理、找出解決方案—這正是技術與產品思維的完美結合。</li>
+</ul>
+</div>
+
+<div class="achievements-block">
+<h4>🚀 技術探索與研究</h4>
+<ul class="achievement-list">
+<li><strong>IoT 物聯網</strong> - 持續關注與研究物聯網技術的發展與應用，從智能家居到工業 4.0，我對於如何將感測器、通訊協定與數據分析結合，創造出有價值的應用場景充滿熱情。</li>
+<li><strong>無人機技術</strong> - 對於無人機的飛控系統、影像處理、自主導航等技術充滿好奇。我不只是使用者，更想深入了解背後的技術原理與應用潛力，無論是在農業、物流還是監測領域。</li>
+</ul>
+</div>
+
+<div class="achievements-block">
+<h4>🏃‍♀️ 運動與生活</h4>
+<ul class="achievement-list">
+<li><strong>慢跑</strong> - 定期慢跑是我維持身心健康的方式。在跑步的過程中，我可以放空思緒、釋放壓力，有時候最好的靈感反而在奔跑中浮現。跑步教會我持之以恆與自我紀律的重要性。</li>
+<li><strong>系統化生活管理</strong> - 將系統化思維應用於日常生活，我習慣為重複性的家務建立 SOP 流程、用專案管理的方式規劃家庭活動、甚至為廚房收納設計分類系統。這種結構化的生活方式讓我在工作與生活之間更有效率地切換，也讓家庭運作更加順暢。</li>
+</ul>
+</div>
+
+<div class="testimonials-block">
+<h4>💬 我的信念</h4>
+<div class="testimonial-card">
+<p class="testimonial-text">"技術思維與生活美學從不衝突，反而相互激盪出更深層的創造力。工程訓練賦予我系統化拆解複雜問題的能力，而藝術與自然的浸潤則保持我對美學的敏銳與對生命的熱情。我深信，卓越的價值創造源於技術深度、全局視野、審美品味，以及對人性與生活本質的透徹洞察。"</p>
+<p class="testimonial-author">— Emma Tan</p>
+</div>
+</div>
+</div>
+
+<div class="lang-content" data-lang="en">
+<div class="meaning-block">
+<h4>💡 Life Philosophy</h4>
+<p>I believe life's richness comes from diverse experiences and continuous exploration. From low-level firmware to product strategy, from entrepreneurial ventures to AI frontiers, 20 years of professional refinement has sustained my passion for innovation and deep insight. Beyond work, I find balance between technology and nature through artistic creation, ecological observation, spatial design, and hands-on projects, allowing technical thinking and life aesthetics to nourish and integrate with each other.</p>
+</div>
+
+<div class="achievements-block">
+<h4>🎨 Art & Creation</h4>
+<ul class="achievement-list">
+<li><strong>Painting & Drawing</strong> - A lifelong passion for art, capturing beautiful moments and wild imaginations with brushes. Whether watercolor, sketching, or digital art, the creative process is my way of healing and self-dialogue. Through colors and lines, I've learned to observe details and express emotions—this aesthetic sensitivity influences my visual thinking in product design.</li>
+</ul>
+</div>
+
+<div class="achievements-block">
+<h4>🌿 Nature & Ecology</h4>
+<ul class="achievement-list">
+<li><strong>Bird Keeping</strong> - Living with several lively feathered friends, observing their interactions and learning their habits brings relaxation to my busy work life. Caring for birds teaches me to listen, be patient, and respect each life's unique personality. To provide better care, I built an IoT environmental monitoring system in the pet room, including temperature/humidity sensors, air quality monitoring, and automated controls, allowing me to track their living conditions remotely even when away from home.</li>
+<li><strong>Turtle Keeping</strong> - The slow-paced life of turtles reminds me that not everything needs to be done quickly. Through turtle care, I've embraced the philosophy of "slowness"—patient observation, careful nurturing, and the meaning of long-term companionship. The pet room's IoT system also includes water quality monitoring and temperature control to ensure turtles have the optimal living environment.</li>
+<li><strong>Fruit Tree Cultivation</strong> - From selecting seedlings, improving soil, fertilizing and watering to pruning management, growing fruit trees lets me experience the complete journey from seed to harvest. Watching a tree grow from sapling to flowering and fruiting mirrors the joy of building a product from MVP to maturity. I built a comprehensive IoT smart management system for the fruit tree greenhouse, integrating soil moisture sensors, automated irrigation, temperature/humidity monitoring, and light control. Through data analysis, I optimize plant growth conditions, applying product manager's data-driven thinking to agricultural practice.</li>
+</ul>
+</div>
+
+<div class="achievements-block">
+<h4>🏗️ Spatial Design & Hands-on Work</h4>
+<ul class="achievement-list">
+<li><strong>Interior Design</strong> - Personally handled multiple interior design projects, from space planning, style definition, material selection to furniture arrangement. I enjoy transforming abstract lifestyle visions into concrete spaces. Design isn't just about aesthetics—it must consider flow, functionality, storage, and user experience, much like product design thinking.</li>
+<li><strong>DIY & Hands-on Projects</strong> - Building on my firmware engineering background, I don't just stop at design—I love hands-on implementation. Whether electrical wiring, plumbing, furniture assembly, or even small carpentry projects, I enjoy the challenge. This "zero-to-one" hands-on building process helps me deeply understand implementation details and problem-solving satisfaction. When facing issues, I systematically break them down, research principles, and find solutions—the perfect combination of engineering and product management thinking.</li>
+</ul>
+</div>
+
+<div class="achievements-block">
+<h4>🚀 Technology Exploration & Research</h4>
+<ul class="achievement-list">
+<li><strong>IoT (Internet of Things)</strong> - Continuously following and researching IoT technology development and applications. From smart homes to Industry 4.0, I'm passionate about combining sensors, communication protocols, and data analytics to create valuable application scenarios.</li>
+<li><strong>Drone Technology</strong> - Fascinated by drone flight control systems, image processing, and autonomous navigation technologies. I'm not just a user—I want to deeply understand the underlying technical principles and application potential, whether in agriculture, logistics, or monitoring.</li>
+</ul>
+</div>
+
+<div class="achievements-block">
+<h4>🏃‍♀️ Sports & Lifestyle</h4>
+<ul class="achievement-list">
+<li><strong>Jogging</strong> - Regular jogging maintains my physical and mental health. While running, I can clear my mind and release stress—sometimes the best ideas emerge during a run. Running teaches me the importance of perseverance and self-discipline.</li>
+<li><strong>Systematic Life Management</strong> - Applying product manager's systematic thinking to daily life, I create SOPs for repetitive household tasks, plan family activities with project management methods, and even design classification systems for kitchen organization. This structured lifestyle helps me switch efficiently between work and personal life while keeping family operations smooth.</li>
+</ul>
+</div>
+
+<div class="testimonials-block">
+<h4>💬 My Belief</h4>
+<div class="testimonial-card">
+<p class="testimonial-text">"Technical thinking and life aesthetics never conflict—they spark deeper creativity through mutual interaction. Engineering training grants me the ability to systematically deconstruct complex problems, while immersion in art and nature sustains my aesthetic acuity and passion for life. I firmly believe exceptional value creation stems from technical depth, holistic vision, aesthetic sensibility, and profound insight into human nature and the essence of life."</p>
+<p class="testimonial-author">— Emma Tan</p>
+</div>
 </div>
 </div>
 </div>
